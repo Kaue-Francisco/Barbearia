@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import logo from '../../../../images/logo.png';
+import logo from '../../images/logo.png';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
@@ -18,7 +18,7 @@ export default function Navbar() {
             <div className="px-10 flex justify-between items-center">
                 
                 <div className="flex items-center">
-                    <img src={logo} alt="Logo" className="h-8 w-8 mr-2"/>
+                    <a href="/"><img src={logo} alt="Logo" className="h-10 w-22 mr-2"/></a>
                 </div>
                 
                 <div className="items-center space-x-4 hidden md:flex">
