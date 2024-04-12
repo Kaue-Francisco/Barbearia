@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import logo from '../../images/logo.png';
+import hamburgue_icon from '../../images/hamburgue_icon.png';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
@@ -14,7 +15,7 @@ export default function Navbar() {
     }
 
     return (
-        <nav className="bg-amber-900 py-7">
+        <nav className="bg-amber-900 py-7 relative">
             <div className="px-10 flex justify-between items-center">
                 
                 <div className="flex items-center">
@@ -23,22 +24,22 @@ export default function Navbar() {
                 
                 <div className="items-center space-x-4 hidden md:flex">
                     <a href="/" className="text-white hover:text-gray-300">Inicio</a>
-                    <a href="/schedule" className="text-white hover:text-gray-300">Agendamento</a>
                     <a href="/contact" className="text-white hover:text-gray-300">Contato</a>
+                    <a href="/schedule" className="text-white hover:text-gray-300">Agendamento</a>
                     <a href="/register" className="inline-block bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Login</a>
                 </div>
-                <button className='md:hidden' onClick={handleNavbarMobile}>X</button>
+                <button className='md:hidden' onClick={handleNavbarMobile}><img className='h-6' src={hamburgue_icon}/></button>
             </div>
 
-                { isOpen ? (
-                <div className="flex flex-col items-center space-x-4  md:hidden">
-                <a href="/register" className="inline-block bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 md:hidden">Login</a>
+            { isOpen ? (
+                <div className="flex flex-col items-end pr-10 space-x-4 md:hidden absolute w-full bg-amber-900 z-10">
                     <a href="/" className="text-white hover:text-gray-300">Inicio</a>
-                    <a href="/schedule" className="text-white hover:text-gray-300">Agendamento</a>
                     <a href="/contact" className="text-white hover:text-gray-300">Contato</a>
+                    <a href="/schedule" className="text-white hover:text-gray-300">Agendamento</a>
+                    <a href="/register" className="inline-block bg-orange-500 text-white px-8 py-1 rounded hover:bg-orange-600 md:hidden mb-4 mt-2">Login</a>
                 </div>
-                ) : null
-                }
+            ) : null
+            }
         </nav>
     )
 }
