@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './components/navbar/Navbar';
+import Footer from './components/footer/Footer';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +14,7 @@ root.render(
   <React.StrictMode>
     <Navbar />
     <App />
+    <Footer />
   </React.StrictMode>
 );
 

@@ -1,8 +1,8 @@
-import backgroundImage from "../../../images/fundo_banner.png";
+import backgroundImage from "../../../../images/fundo_banner.png";
 
 export default function Banner() {
     return (
-        <div className="relative w-full h-[87vh]">          
+        <div className="relative w-full h-[88vh]">          
           <img alt="Image" className="object-cover w-full h-full" src={backgroundImage} />
           <div className="absolute inset-0 bg-black opacity-50"></div> {/* Adicionado para diminuir o brilho */}
           

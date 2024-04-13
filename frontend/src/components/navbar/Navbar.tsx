@@ -15,7 +15,7 @@ export default function Navbar() {
     }
 
     return (
-        <nav className="bg-amber-900 py-7 relative">
+        <nav className="bg-amber-900 py-6 relative">
             <div className="px-10 flex justify-between items-center">
                 
                 <div className="flex items-center">
