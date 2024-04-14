@@ -26,7 +26,7 @@ export default function Navbar() {
                     <a href="/" className="text-white hover:text-gray-300">Inicio</a>
                     <a href="/contact" className="text-white hover:text-gray-300">Contato</a>
                     <a href="/schedule" className="text-white hover:text-gray-300">Agendamento</a>
-                    <a href="/register" className="inline-block bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Login</a>
+                    <a href="/login" className="inline-block bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Login</a>
                 </div>
                 <button className='md:hidden' onClick={handleNavbarMobile}><img className='h-6' src={hamburgue_icon}/></button>
             </div>
@@ -36,7 +36,7 @@ export default function Navbar() {
                     <a href="/" className="text-white hover:text-gray-300">Inicio</a>
                     <a href="/contact" className="text-white hover:text-gray-300">Contato</a>
                     <a href="/schedule" className="text-white hover:text-gray-300">Agendamento</a>
-                    <a href="/register" className="inline-block bg-orange-500 text-white px-8 py-1 rounded hover:bg-orange-600 md:hidden mb-4 mt-2">Login</a>
+                    <a href="/login" className="inline-block bg-orange-500 text-white px-8 py-1 rounded hover:bg-orange-600 md:hidden mb-4 mt-2">Login</a>
                 </div>
             ) : null
             }
