@@ -38,7 +38,7 @@ export default function Login() {
             </div>
             <div className="mt-4 text-center text-sm">
               Não tem uma conta?
-              <a className="underline text-indigo-600 hover:text-indigo-500" href="#">
+              <a className="underline text-indigo-600 hover:text-indigo-500" href="/register">
                 Inscrever-se
               </a>
             </div>
