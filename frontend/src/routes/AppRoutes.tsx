@@ -7,7 +7,7 @@ import Contact from '../pages/contact/Contact';
 
 export default function AppRoutes() {
     /**
-     * Cria as rotas da aplicação.
+     *  Rotas da aplicação.
      */
 
     const router = createBrowserRouter([
