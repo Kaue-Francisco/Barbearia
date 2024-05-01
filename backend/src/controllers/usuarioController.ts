@@ -22,4 +22,18 @@ export class UsuarioController {
             res.status(400).json({ message: error.message });
         }
     }
+
+    async login(req: any, res: any) {
+        // Controller para logar um usuário
+
+        try {
+            const { email, senha } = req.body;
+
+            const token = await usuarioService.LogarUsuario({email, senha});
+            res.status(200).json({ token });
+
+        } catch (error: Error | any) {
+            res.status(400).json({ message: error.message });
+        }
+    }
 }
