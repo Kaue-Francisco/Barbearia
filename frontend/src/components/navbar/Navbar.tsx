@@ -10,30 +10,38 @@ export default function Navbar() {
     };
 
     return (
-        <nav style={{ minHeight: '10vh' }} className="bg-amber-900 flex items-center relative">
-            <div className="px-10 flex justify-between items-center w-full h-full">
-                <div className="flex items-center">
-                    <a href="/"><img src={logo} alt="Logo" className="h-10 w-22 mr-2" /></a>
-                </div>
-
-                <div className="items-center space-x-4 hidden md:flex">
-                    <a href="/" className="text-white hover:text-gray-300">Inicio</a>
-                    <a href="/contact" className="text-white hover:text-gray-300">Contato</a>
-                    <a href="/schedule" className="text-white hover:text-gray-300">Agendamento</a>
-                    <a href="/login" className="inline-block bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Login</a>
-                </div>
-                
-                <button className='md:hidden' onClick={handleNavbarMobile}>
-                    <img className='h-6' src={hamburgue_icon} />
-                </button>
+        <nav className="bg-amber-900 flex items-center justify-between px-6 py-4 md:px-10 fixed w-full z-50">
+            <div className="flex items-center">
+                <a href="/">
+                    <img 
+                        src={logo} 
+                        alt="Logo" 
+                        className="h-10 w-22 mr-2 transition-transform transform hover:scale-110" 
+                    />
+                </a>
             </div>
 
+            <div className="hidden md:flex items-center space-x-4">
+                <a href="/" className="text-white hover:text-gray-300 transition-colors duration-300">Inicio</a>
+                <a href="/contact" className="text-white hover:text-gray-300 transition-colors duration-300">Contato</a>
+                <a href="/schedule" className="text-white hover:text-gray-300 transition-colors duration-300">Agendamento</a>
+                <a href="/login" className="inline-block bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors duration-300">Login</a>
+            </div>
+
+            <button className='md:hidden' onClick={handleNavbarMobile}>
+                <img 
+                    className='h-6 transition-transform transform hover:scale-110' 
+                    src={hamburgue_icon} 
+                    alt="Menu"
+                />
+            </button>
+
             {isOpen && (
-                <div className="flex flex-col items-end pr-10 md:hidden absolute w-full bg-amber-900 z-10">
-                    <a href="/" className="text-white hover:text-gray-300">Inicio</a>
-                    <a href="/contact" className="text-white hover:text-gray-300">Contato</a>
-                    <a href="/schedule" className="text-white hover:text-gray-300">Agendamento</a>
-                    <a href="/login" className="inline-block bg-orange-500 text-white px-8 py-1 rounded hover:bg-orange-600 mb-4 mt-2">Login</a>
+                <div className="flex flex-col items-end md:hidden absolute top-full right-0 w-full bg-amber-900 z-50">
+                    <a href="/" className="text-white hover:text-gray-300 transition-colors duration-300 py-2 px-6">Inicio</a>
+                    <a href="/contact" className="text-white hover:text-gray-300 transition-colors duration-300 py-2 px-6">Contato</a>
+                    <a href="/schedule" className="text-white hover:text-gray-300 transition-colors duration-300 py-2 px-6">Agendamento</a>
+                    <a href="/login" className="inline-block bg-orange-500 mx-6 text-white px-8 py-2 rounded hover:bg-orange-600 transition-colors duration-300 mt-2 mb-4">Login</a>
                 </div>
             )}
         </nav>
