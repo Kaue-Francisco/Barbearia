@@ -11,7 +11,9 @@ export default function Content() {
             flexDirection: 'column',
             alignItems: 'center',
             textAlign: 'center',
-        }}>
+        }}
+        className='py-16'
+        >
         
         <Cards />
 
