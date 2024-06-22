@@ -1,6 +1,6 @@
 import React from 'react';
 import './Cards.css';
-import GradualSpacing from '../../animation/gradualSpacing';
+import GradualSpacing from '../../../animation/gradualSpacing';
 
 interface CardProps {
   initialImagePosition?: 'left' | 'right';
@@ -25,8 +25,8 @@ export default function Card({ initialImagePosition = "left", textAlignment = "l
         />
       </div>
       <div className={`md:${textOrder} order-1 space-y-4 p-4 ${textAlignClass}`}> {/* Aplica a classe de alinhamento do texto */}
-        <h2 className="text-2xl font-bold">{title}</h2>
-        <p className="text-muted-foreground">
+        <h2 className="text-3xl font-bold">{title}</h2>
+        <p className="text-muted-foreground text-xl">
           <GradualSpacing text={description} />
         </p>
       </div>

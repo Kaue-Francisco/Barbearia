@@ -1,7 +1,7 @@
 import React from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import servicosImage from '../../../../../images/servicos.png';
-import servicosMobile from '../../../../../images/servicosMobile.png';
+import servicosImage from '../../../../../../images/servicos.png';
+import servicosMobile from '../../../../../../images/servicosMobile.png';
 
 export default function Price () {
     const isMobile = useMediaQuery('(max-width:600px)');

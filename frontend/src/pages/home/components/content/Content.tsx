@@ -1,8 +1,8 @@
 import backgroundImage from '../../../../images/background.png';
 import corteCabelo from '../../../../images/corte_cabelo.jpg';
 import barbeariaImage from '../../../../images/barbearia.jpg';
-import Card from './components/Cards'; // Verifique se o nome do arquivo é `Card.js` ou `Card.tsx`
-import Price from './components/Price';
+import Card from './components/Cards/Cards'; // Verifique se o nome do arquivo é `Card.js` ou `Card.tsx`
+import Price from './components/Price/Price';
 
 export default function Content() {
     return (
@@ -28,9 +28,9 @@ export default function Content() {
             <Card
                 initialImagePosition="right"
                 textAlignment = 'right'
-                imageSrc={corteCabelo}
-                title="Cortes"
-                description="A Companhia do Bigode é o lugar certo para cortes de cabelo e barba! Atendemos apenas com agendamento, e você pode relaxar tomando uma cervejinha enquanto espera o seu horário!"
+                imageSrc={barbeariaImage}
+                title="Ambiente"
+                description="A Companhia do conta com um ambiente limpo e agradável, com profissionais qualificados e prontos para te atender! Venha conhecer a nossa barbearia!"
             />
 
             <Price />
