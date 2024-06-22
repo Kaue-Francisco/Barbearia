@@ -10,7 +10,7 @@ export default function Navbar() {
     };
 
     return (
-        <nav className="bg-amber-900 flex items-center justify-between px-6 py-4 md:px-10 fixed w-full z-50">
+        <nav className="bg-amber-900/95 flex items-center justify-between px-6 py-4 md:px-10 fixed w-full z-50">
             <div className="flex items-center">
                 <a href="/">
                     <img 
@@ -37,7 +37,7 @@ export default function Navbar() {
             </button>
 
             {isOpen && (
-                <div className="flex flex-col items-end md:hidden absolute top-full right-0 w-full bg-amber-900 z-50">
+                <div className="flex flex-col items-end md:hidden absolute top-full right-0 w-full bg-amber-900/90 z-50">
                     <a href="/" className="text-white hover:text-gray-300 transition-colors duration-300 py-2 px-6">Inicio</a>
                     <a href="/contact" className="text-white hover:text-gray-300 transition-colors duration-300 py-2 px-6">Contato</a>
                     <a href="/schedule" className="text-white hover:text-gray-300 transition-colors duration-300 py-2 px-6">Agendamento</a>
