@@ -6,6 +6,7 @@ export default function Home () {
       <div>
         <Banner />
         <Content />
+        
       </div>
     )
 }
