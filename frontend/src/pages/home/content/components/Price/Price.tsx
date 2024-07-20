@@ -18,7 +18,7 @@ export default function Price () {
             <img 
             src={imageSource} 
             alt="Descrição da nova imagem"
-            width={isMobile ? '90%' : '100%'} // Ajusta a largura baseada no tipo de dispositivo
+            style={{ width: isMobile ? '90%' : '100%', maxWidth: '80rem' }} // Ajusta a largura e define maxWidth para telas maiores
             className='mx-auto rounded-lg'/>
         </div>
     )

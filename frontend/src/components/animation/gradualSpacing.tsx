@@ -43,7 +43,7 @@ export default function GradualSpacing({
             exit="hidden"
             variants={framerProps}
             transition={{ duration, delay: i * delayMultiple }}
-            style={{ display: "inline-block", whiteSpace: "nowrap" }}
+            style={{ display: "inline-block" }}
           >
             {word}&nbsp;
           </motion.span>

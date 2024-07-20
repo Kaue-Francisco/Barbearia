@@ -22,10 +22,10 @@ export default function Card({ initialImagePosition = "left", textAlignment = "l
         <img
           src={imageSrc}
           alt={title}
-          className="w-full h-auto rounded-lg overflow-hidden brightness-50-contrast-150 md:max-w-md mx-auto"
+          className="max-w-80 max-h-80 rounded-lg overflow-hidden brightness-50-contrast-150 md:max-w-none mx-auto"
         />
       </div>
-      <div className={`${textOrder} space-y-4 p-4 ${textAlignClass}`}> {/* Aplica a classe de alinhamento do texto corretamente */}
+      <div className={`${textOrder} space-y-4 p-4 ${textAlignClass} max-w-80 md:max-w-none mx-auto`}> {/* Aplica a classe de alinhamento do texto corretamente e limita a largura máxima do texto */}
         <h2 className="text-3xl font-bold">{title}</h2>
         <p className="text-muted-foreground text-xl">
           <GradualSpacing text={description} />
