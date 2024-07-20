@@ -1,7 +1,7 @@
-import backgroundImage from '../../../../images/background.png';
-import corteCabelo from '../../../../images/corte_cabelo.jpg';
-import barbeariaImage from '../../../../images/barbearia.jpg';
-import Card from './components/Cards/Cards'; // Verifique se o nome do arquivo é `Card.js` ou `Card.tsx`
+import backgroundImage from '../../../images/background.png';
+import corteCabelo from '../../../images/corte_cabelo.jpg';
+import barbeariaImage from '../../../images/barbearia.jpg';
+import Card from './components/Cards/Cards';
 import Price from './components/Price/Price';
 import Location from './components/Location/Location';
 

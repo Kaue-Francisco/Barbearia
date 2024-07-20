@@ -1,7 +1,7 @@
 import React from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import novaImagem from '../../../../../../images/servicos.png'; // Substitua pelo caminho correto da nova imagem
-import novaImagemMobile from '../../../../../../images/servicosMobile.png'; // Substitua pelo caminho correto da versão móvel da nova imagem
+import novaImagem from '../../../../../images/servicos.png';
+import novaImagemMobile from '../../../../../images/servicosMobile.png';
 
 export default function Price () {
     const isMobile = useMediaQuery('(max-width:600px)');

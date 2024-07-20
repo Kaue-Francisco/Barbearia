@@ -1,9 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Passo 1
-import backgroundImage from "../../../../images/fundo_banner.png";
+import { useNavigate } from 'react-router-dom';
+import backgroundImage from "../../../images/fundo_banner.png";
 
 export default function Banner() {
-    const navigate = useNavigate(); // Passo 2
+    const navigate = useNavigate();
 
     return (
         <div className="relative w-full h-screen">
@@ -22,7 +22,7 @@ export default function Banner() {
 
                 <div className="mt-10">
                     <button 
-                        onClick={() => navigate('/schedule')} // Passo 3
+                        onClick={() => navigate('/schedule')}
                         className="inline-flex h-12 items-center rounded-md bg-orange-500 px-4 text-lg font-medium text-gray-50 transition-colors hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
                     >
                         Agende seu horário!

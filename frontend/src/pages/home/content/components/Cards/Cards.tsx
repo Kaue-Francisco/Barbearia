@@ -1,10 +1,10 @@
 import React from 'react';
 import './Cards.css';
-import GradualSpacing from '../../../animation/gradualSpacing';
+import GradualSpacing from '../../../../../components/animation/gradualSpacing';
 
 interface CardProps {
   initialImagePosition?: 'left' | 'right';
-  textAlignment?: 'left' | 'right'; // Adicionado nova propriedade para alinhamento do texto
+  textAlignment?: 'left' | 'right';
   imageSrc: string;
   title: string;
   description: string;
