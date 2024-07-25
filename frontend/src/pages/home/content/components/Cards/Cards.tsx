@@ -23,6 +23,7 @@ export default function Card({ initialImagePosition = "left", textAlignment = "l
           src={imageSrc}
           alt={title}
           className="max-w-80 max-h-80 rounded-lg overflow-hidden brightness-50-contrast-150 md:max-w-none mx-auto"
+          style={{"userSelect": "none"}}
         />
       </div>
       <div className={`${textOrder} space-y-4 p-4 ${textAlignClass} max-w-80 md:max-w-none mx-auto`}> {/* Aplica a classe de alinhamento do texto corretamente e limita a largura máxima do texto */}

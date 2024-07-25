@@ -14,7 +14,7 @@ export default function Price () {
     }
 
     return (
-        <div className="text-3xl font-bold flex flex-col items-center mt-8">
+        <div className="text-3xl font-bold flex flex-col items-center mt-8" style={{"userSelect": "none"}}>
             <img 
             src={imageSource} 
             alt="Descrição da nova imagem"

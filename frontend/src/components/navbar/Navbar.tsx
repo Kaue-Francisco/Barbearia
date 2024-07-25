@@ -10,7 +10,7 @@ export default function Navbar() {
     };
 
     return (
-        <nav className="bg-amber-900/95 flex items-center justify-between w-screen max-w-full px-6 py-4 fixed z-50">
+        <nav className="bg-amber-900/95 flex items-center justify-between w-screen max-w-full px-6 py-4 fixed z-50" style={{"userSelect": "none"}}>
             <div className="flex items-center">
                 <a href="/">
                     <img 

@@ -6,7 +6,7 @@ export default function Banner() {
     const navigate = useNavigate();
 
     return (
-        <div className="relative w-full h-screen">
+        <div className="relative w-full h-screen" style={{"userSelect": "none"}}>
             <img alt="Image" className="object-cover w-full h-full" src={backgroundImage} />
             <div className="absolute inset-0 bg-black opacity-50"></div>
             
