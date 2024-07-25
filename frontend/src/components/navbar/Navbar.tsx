@@ -24,8 +24,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center space-x-4">
                 <a href="/" className="text-white hover:text-gray-300 transition-colors duration-300">Inicio</a>
                 <a href="/contact" className="text-white hover:text-gray-300 transition-colors duration-300">Contato</a>
-                <a href="/schedule" className="text-white hover:text-gray-300 transition-colors duration-300">Agendamento</a>
-                <a href="/login" className="inline-block bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors duration-300">Login</a>
+                <a href="/schedule" className="inline-block bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors duration-300">Agendamento</a>
             </div>
 
             <button className='md:hidden' onClick={handleNavbarMobile}>
@@ -40,8 +39,7 @@ export default function Navbar() {
                 <div className="flex flex-col items-start md:hidden absolute top-full right-0 w-full bg-amber-900/90 z-50">
                     <a href="/" className="text-white hover:text-gray-300 transition-colors duration-300 py-2 px-6">Inicio</a>
                     <a href="/contact" className="text-white hover:text-gray-300 transition-colors duration-300 py-2 px-6">Contato</a>
-                    <a href="/schedule" className="text-white hover:text-gray-300 transition-colors duration-300 py-2 px-6">Agendamento</a>
-                    <a href="/login" className="inline-block bg-orange-500 mx-6 text-white px-8 py-2 rounded hover:bg-orange-600 transition-colors duration-300 mt-2 mb-4">Login</a>
+                    <a href="/schedule" className="inline-block bg-orange-500 mx-6 text-white px-8 py-2 rounded hover:bg-orange-600 transition-colors duration-300 mt-2 mb-4">Agendamento</a>
                 </div>
             )}
         </nav>
