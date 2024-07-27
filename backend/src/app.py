@@ -1,12 +1,14 @@
 ################################################################################
 #region Imports Librarys
 
-from flask import Flask
+from flask import Flask, jsonify, make_response
+from controllers.schedule_controller import ScheduleController
 
 ################################################################################
 # App Configurations
 
 app = Flask(__name__)
+schedule_controller = ScheduleController()
 
 ################################################################################
 #region Routes
@@ -17,10 +19,9 @@ app = Flask(__name__)
 @app.route("/main")
 @app.route("/inicio")
 def index():
-    return "Hello, World!"
+    return "Home Page"
 
 ################################################################################
-
 @app.route("/contact")
 @app.route("/contato")
 @app.route("/contatos")
@@ -28,9 +29,15 @@ def index():
 def contact():
     return "Contact Page"
 
+################################################################################
+@app.route("/agendamento")
+@app.route("/agenda")
+@app.route("/schedule")
+def schedule():
+    return make_response(jsonify(schedule_controller.get_schedule_date()))
 
 ################################################################################
 #region Main
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
