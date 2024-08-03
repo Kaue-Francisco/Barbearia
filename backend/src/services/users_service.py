@@ -1,7 +1,7 @@
 ################################################################################
 # Imports and Modules
 
-from backend.src.models.client.client import Client
+from models.client.client import Client
 
 ################################################################################
 class UsersService:
@@ -10,7 +10,7 @@ class UsersService:
         pass
     
     ################################################################################
-    def create_user(self, name: str, email: str, phone_number: str, db_conn) -> Client:
+    def create_user(self, name: str, email: str, phone_number: str, db_conn) -> bool:
         """ Create a new user and return the created user. """
         
         user = Client(name=name, email=email, phone_number=phone_number)
@@ -18,3 +18,9 @@ class UsersService:
         db_conn.session.commit()
 
         return True
+    
+    ################################################################################
+    def get_user(self, email: str, db_conn) -> bool:
+        """ Get a user by email and return the user. """
+        
+        return db_conn.session.query(Client).filter_by(email=email).first()
