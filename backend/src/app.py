@@ -2,8 +2,8 @@
 #region Imports and Modules
 
 from flask import Flask, jsonify, make_response, request
-from controllers.schedule_controller import ScheduleController
-from controllers.users_controller import UsersController
+from controllers.schedulle.schedule_controller import ScheduleController
+from controllers.users.users_controller import UsersController
 from database.connect_database import DatabaseConnect
 
 ################################################################################

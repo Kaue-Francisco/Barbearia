@@ -1,7 +1,7 @@
 ################################################################################
 # Imports Librarys and Modules
 
-from services.users_service import UsersService
+from services.users.users_service import UsersService
 from flask_sqlalchemy import SQLAlchemy
 
 ################################################################################

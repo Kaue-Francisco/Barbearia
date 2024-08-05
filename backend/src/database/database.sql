@@ -24,22 +24,19 @@ CREATE TABLE `schedullings`(
     `date` DATE NOT NULL,
     `start_time` DATETIME NOT NULL,
     `end_time` DATETIME NOT NULL,
-    `client_id` BIGINT UNSIGNED NOT NULL
+    `client_id` BIGINT UNSIGNED NOT NULL,
+    FOREIGN KEY(`client_id`) REFERENCES `client`(`id`)
 );
 
 CREATE TABLE `services_schedulling`(
-    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `id_services` BIGINT UNSIGNED NOT NULL,
-    `id_schedullings` BIGINT UNSIGNED NOT NULL
+    `id_schedullings` BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id_services`, `id_schedullings`),
+    FOREIGN KEY (`id_services`) REFERENCES `services`(`id`),
+    FOREIGN KEY (`id_schedullings`) REFERENCES `schedullings`(`id`)
 );
 
-ALTER TABLE
-    `schedullings` ADD CONSTRAINT `schedullings_client_id_foreign` FOREIGN KEY(`client_id`) REFERENCES `client`(`id`);
-ALTER TABLE
-    `services_schedulling` ADD CONSTRAINT `services_schedulling_id_services_foreign` FOREIGN KEY(`id_services`) REFERENCES `services`(`id`);
-ALTER TABLE
-    `services_schedulling` ADD CONSTRAINT `services_schedulling_id_schedullings_foreign` FOREIGN KEY(`id_schedullings`) REFERENCES `schedullings`(`id`);
-    
+-- Exemplo de inserção de dados
 INSERT INTO `services`(`service_name`, `duration`) VALUES ("Cabelo", 30);
 INSERT INTO `services`(`service_name`, `duration`) VALUES ("Barba", 30);
 INSERT INTO `services`(`service_name`, `duration`) VALUES ("Sobrancelha", 0);
