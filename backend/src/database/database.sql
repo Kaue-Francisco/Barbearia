@@ -21,7 +21,7 @@ CREATE TABLE `services`(
 
 CREATE TABLE `schedullings`(
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `data` DATE NOT NULL,
+    `date` DATE NOT NULL,
     `start_time` DATETIME NOT NULL,
     `end_time` DATETIME NOT NULL,
     `client_id` BIGINT UNSIGNED NOT NULL
@@ -39,3 +39,7 @@ ALTER TABLE
     `services_schedulling` ADD CONSTRAINT `services_schedulling_id_services_foreign` FOREIGN KEY(`id_services`) REFERENCES `services`(`id`);
 ALTER TABLE
     `services_schedulling` ADD CONSTRAINT `services_schedulling_id_schedullings_foreign` FOREIGN KEY(`id_schedullings`) REFERENCES `schedullings`(`id`);
+    
+INSERT INTO `services`(`service_name`, `duration`) VALUES ("Cabelo", 30);
+INSERT INTO `services`(`service_name`, `duration`) VALUES ("Barba", 30);
+INSERT INTO `services`(`service_name`, `duration`) VALUES ("Sobrancelha", 0);

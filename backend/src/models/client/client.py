@@ -16,4 +16,4 @@ class Client(db.Model):
     phone_number = db.Column(db.String(11), unique=True, nullable=False)
     
     def __repr__(self):
-        return f"<Client(name={self.name}>"
+        return f"{{'id': {self.id}, 'name': {self.name}, 'email': {self.email}, 'phone_number': {self.phone_number}}}"

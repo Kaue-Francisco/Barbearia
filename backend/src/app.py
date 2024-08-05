@@ -47,13 +47,13 @@ def schedule():
 def send_schedule():
     data = request.get_json()['data']
     
-    message, status = users_controller.create_user(data, db_conn)
+    response_user = users_controller.create_user(data, db_conn)
     
     # If the status is 201, the user was created successfully.
-    if status == 201:
-        return message
-    
-    return message
+    if response_user['status'] == 201:
+        response_schedule = schedule_controller.create_schedule(data, db_conn)
+        
+        return make_response(jsonify(response_schedule))
 
 ################################################################################
 #region Main

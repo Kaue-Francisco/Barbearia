@@ -2,6 +2,7 @@
 # Imports and Modules
 
 from models.client.client import Client
+from flask_sqlalchemy import SQLAlchemy
 
 ################################################################################
 class UsersService:
@@ -10,7 +11,7 @@ class UsersService:
         pass
     
     ################################################################################
-    def create_user(self, name: str, email: str, phone_number: str, db_conn) -> bool:
+    def create_user(self, name: str, email: str, phone_number: str, db_conn: SQLAlchemy) -> bool:
         """ Create a new user and return the created user. """
         
         user = Client(name=name, email=email, phone_number=phone_number)
@@ -20,7 +21,7 @@ class UsersService:
         return True
     
     ################################################################################
-    def get_user(self, email: str, db_conn) -> bool:
+    def get_user(self, email: str, db_conn: SQLAlchemy) -> None:
         """ Get a user by email and return the user. """
         
         return db_conn.session.query(Client).filter_by(email=email).first()

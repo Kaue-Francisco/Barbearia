@@ -20,18 +20,16 @@ class UsersController:
         phone_number = data.get('phone_number')
         
         # Check if the user already exists
-        user = self.is_user_exists(email, db_conn) if not self.is_user_exists(email, db_conn) else True
+        user = self.is_user_exists(email, db_conn)
         
         # If the variable user is not None.
         if not user:
             self.users_service.create_user(name, email, phone_number, db_conn)
             
-            return {"message": "User created successfully."}, 201
-            
-        return {"message": "Unable to create user."}, 401
+        return {"message": "User checked.", "status": 201}
     
     ################################################################################
-    def get_user(self, email, db_conn) -> None:
+    def get_user(self, email: str, db_conn: SQLAlchemy) -> None:
         """ Get a user. """
         
         user = self.users_service.get_user(email, db_conn)
@@ -54,7 +52,7 @@ class UsersController:
         pass
     
     ################################################################################
-    def is_user_exists(self, email: str, db_conn) -> None:
+    def is_user_exists(self, email: str, db_conn: SQLAlchemy) -> None:
         """ Check if the user already exists. """
         
         # Get the user by email and return False if the user does not exist.
