@@ -38,9 +38,13 @@ def contact():
 @app.route("/agendamento")
 @app.route("/agenda")
 @app.route("/schedule")
-@app.route("/agendar/")
+@app.route("/agendar")
 def schedule():
-    return make_response(jsonify(schedule_controller.get_schedule_date()))
+    all_hours_of_day = schedule_controller.get_available_hours(db_conn)
+    
+    for hour in all_hours_of_day:
+        print("hour:", hour)
+    return make_response(jsonify(schedule_controller.get_available_hours(db_conn)))
 
 ################################################################################
 @app.route("/send_schedule", methods=["POST"])
