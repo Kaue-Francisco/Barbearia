@@ -12,7 +12,6 @@ class Client(db.Model):
     
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(255), unique=True, nullable=False)
     phone_number = db.Column(db.String(11), unique=True, nullable=False)
     
     def __repr__(self):

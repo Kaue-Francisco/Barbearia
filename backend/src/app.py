@@ -16,35 +16,12 @@ database_connection = DatabaseConnect(app)
 db_conn = database_connection.get_db()
 
 ################################################################################
-#region Routes
-
-@app.route("/")
-@app.route("/home")
-@app.route("/index")
-@app.route("/main")
-@app.route("/inicio")
-def index():
-    return "Home Page"
-
-################################################################################
-@app.route("/contact")
-@app.route("/contato")
-@app.route("/contatos")
-@app.route("/touch")
-def contact():
-    return "Contact Page"
-
-################################################################################
-@app.route("/agendamento")
-@app.route("/agenda")
-@app.route("/schedule")
-@app.route("/agendar")
+@app.route("/schedule", methods=["POST"])
 def schedule():
-    all_hours_of_day = schedule_controller.get_available_hours(db_conn)
+    data = request.get_json()['services']
+    all_hours_of_day = schedule_controller.get_available_hours(data, db_conn)
     
-    for hour in all_hours_of_day:
-        print("hour:", hour)
-    return make_response(jsonify(schedule_controller.get_available_hours(db_conn)))
+    return make_response(jsonify(all_hours_of_day))
 
 ################################################################################
 @app.route("/send_schedule", methods=["POST"])
@@ -58,6 +35,15 @@ def send_schedule():
         response_schedule = schedule_controller.create_schedule(data, db_conn)
         
         return make_response(jsonify(response_schedule))
+
+################################################################################
+@app.route("/schedulings_by_user", methods=["POST"])
+def schedulings_by_user():
+    data = request.get_json()['data']
+    
+    response = schedule_controller.get_schedules_by_user(data, db_conn)
+    
+    return make_response(jsonify(response))
 
 ################################################################################
 #region Main

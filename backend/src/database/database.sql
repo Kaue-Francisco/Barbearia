@@ -12,11 +12,8 @@ USE `barbearia_db`;
 CREATE TABLE `client`(
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
-    `email` VARCHAR(255) NOT NULL,
     `phone_number` CHAR(11) NOT NULL
 );
-ALTER TABLE
-    `client` ADD UNIQUE `client_email_unique`(`email`);
 ALTER TABLE
     `client` ADD UNIQUE `client_phone_number_unique`(`phone_number`);
 
