@@ -67,6 +67,7 @@ export default function Login() {
 
                 <input 
                   id="password" 
+                  placeholder='*********'
                   required type="password" 
                   className="mt-1 p-2 bg-gray-200 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" 
                   value={ senha }
