@@ -13,6 +13,8 @@ class Client(db.Model):
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
     phone_number = db.Column(db.String(11), unique=True, nullable=False)
+    email = db.Column(db.String(255), unique=True, nullable=False)
+    password = db.Column(db.String(255), nullable=False)
     
     def __repr__(self):
-        return f"{{'id': {self.id}, 'name': {self.name}, 'email': {self.email}, 'phone_number': {self.phone_number}}}"
+        return f"{{'id': {self.id}, 'name': {self.name}, 'phone_number': {self.phone_number}}}"

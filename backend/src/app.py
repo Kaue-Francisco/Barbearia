@@ -46,6 +46,28 @@ def schedulings_by_user():
     return make_response(jsonify(response))
 
 ################################################################################
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()['data']
+    
+    response = users_controller.login(data, db_conn)
+    
+    return make_response(jsonify(response))
+
+################################################################################
+@app.route("/register", methods=["POST"])
+def register():
+    data = request.get_json()['data']
+
+    response = users_controller.register(data, db_conn)
+    
+    if response['status'] == 200:
+        return make_response(jsonify(response["type"]), 402)
+    
+    elif response['status'] == 404:
+        return make_response(jsonify(response["type"]), 200)
+
+################################################################################
 #region Main
 
 if __name__ == "__main__":

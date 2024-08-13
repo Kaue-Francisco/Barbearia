@@ -9,31 +9,32 @@ class UsersController:
     
     def __init__(self):
         self.users_service = UsersService()
+        self.user = {}
     
     ################################################################################
-    def create_user(self, data: object, db_conn: SQLAlchemy) -> None:
-        """ Create a new user. """
+    def register(self, data: object, db_conn: SQLAlchemy) -> None:
+        """ Register a new user. """
         
-        # Get the data from the request.
-        name = data.get('name')
-        phone_number = data.get('phone_number')
+        user_data = {
+            "email": data.get('email'), 
+            "phone_number": data.get('phone_number')
+            }
         
         # Check if the user already exists
-        user = self.is_user_exists(phone_number, db_conn)
+        user = self.is_user_exists(user_data, db_conn)
         
         # If the variable user is not None.
-        if not user:
-            self.users_service.create_user(name, phone_number, db_conn)
+        if user["status"] == 404:
+            self.users_service.create_user(data, db_conn)
+            return {"message": "User register sucessfly.", "status": 201, "type": "successfully"}
             
-        return {"message": "User checked.", "status": 201}
-    
+        return user
+            
     ################################################################################
-    def get_user(self, phone_number: str, db_conn: SQLAlchemy) -> None:
+    def get_user(self, data: dict, db_conn: SQLAlchemy) -> None:
         """ Get a user. """
         
-        user = self.users_service.get_user(phone_number, db_conn)
-        
-        return user
+        return self.users_service.get_user(data, db_conn)
     
     ################################################################################
     def update_user(self) -> None:
@@ -51,15 +52,24 @@ class UsersController:
         pass
     
     ################################################################################
-    def is_user_exists(self, phone_number: str, db_conn: SQLAlchemy) -> None:
+    def is_user_exists(self, user_data: object, db_conn: SQLAlchemy) -> None:
         """ Check if the user already exists. """
         
-        # Get the user by phone_number and return False if the user does not exist.
-        user = self.get_user(phone_number, db_conn)
+        data = {}
         
-        if user is None:
-            return False
+        # Get the user by email
+        data['email'] = user_data["email"]
+        data['type'] = "email"
+        response = self.get_user(data, db_conn)
+        
+        if response['status'] == 200: return response
+
+        data['phone_number'] = user_data["phone_number"]
+        data['type'] = "phone_number"
+        response = self.users_service.get_user(data, db_conn)
+        
+        if response['status'] == 200: return response
             
-        return True
+        return {"message": "User not found.", "status": 404}
     
     ################################################################################

@@ -174,10 +174,10 @@ class ScheduleController:
         """ Get all the schedules by user. """
         
         # Get the data from the request.
-        user_email = data.get('phone_number')
+        phone_number = data.get('phone_number')
         
         # Get the user from the database.
-        user = self.users_controller.get_user(user_email, db_conn)
+        user = self.users_controller.get_user(phone_number, db_conn)
         
         # Get all the schedules by user.
         schedules = self.schedule_service.get_schedules_by_user(user, db_conn)

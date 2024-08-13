@@ -27,3 +27,22 @@ class ScheduleService:
         schedulings = db_conn.session.query(Schedule).all()
         
         return schedulings
+    
+    ################################################################################
+    def get_schedules_by_user(self, user, db_conn) -> list:
+        """ Get all the schedulings by user. """
+        
+        schedules = db_conn.session.query(Schedule).filter_by(client_id=user.id).all()
+        
+        # Convert each Schedule object to a dictionary
+        schedules_dict = []
+        for schedule in schedules:
+            schedules_dict.append({
+                'id': schedule.id,
+                'date': schedule.date.isoformat(),  # Convert to a JSON-compatible string
+                'start_time': schedule.start_time.isoformat(),
+                'end_time': schedule.end_time.isoformat(),
+                # Add other attributes as needed
+            })
+
+        return schedules_dict
