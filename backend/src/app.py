@@ -52,11 +52,7 @@ def register():
 
     response = users_controller.register(data, db_conn)
     
-    if response['status'] == 200:
-        return make_response(jsonify(response["type"]), 402)
-    
-    elif response['status'] == 201:
-        return make_response(jsonify(response["type"]), 200)
+    return make_response(jsonify(response["message"], response["error"]), response['status'])
 
 ################################################################################
 @app.route("/login", methods=["POST"])
@@ -65,7 +61,7 @@ def login():
     
     response = users_controller.login(data, db_conn)
     
-    return make_response(jsonify(response["type"]), response["status"])
+    return make_response(jsonify(response["message"]), response["status"])
 
 ################################################################################
 #region Main

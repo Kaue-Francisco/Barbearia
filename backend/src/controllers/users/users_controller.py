@@ -3,7 +3,7 @@
 
 from services.users.users_service import UsersService
 from flask_sqlalchemy import SQLAlchemy
-from bcrypt import checkpw
+from bcrypt import checkpw, gensalt, hashpw
 
 ################################################################################
 class UsersController:
@@ -13,7 +13,7 @@ class UsersController:
         self.user = {}
     
     ################################################################################
-    def register(self, data: object, db_conn: SQLAlchemy) -> None:
+    def register(self, data: object, db_conn: SQLAlchemy) -> dict:
         """ Register a new user. """
         
         user_data = {
@@ -21,50 +21,55 @@ class UsersController:
             "phone_number": data.get('phone_number')
             }
         
-        # Check if the user already exists
-        user = self.is_user_exists(user_data, db_conn)
+        exists_user, key = self.is_user_exists(user_data, db_conn)
         
         # If the variable user is not None.
-        if user["status"] == 404:
+        if not exists_user:
+            # Hash the password
+            salt = gensalt()
+            data['password'] = hashpw(data.get('password').encode('utf-8'), salt)
+
             self.users_service.create_user(data, db_conn)
-            return {"message": "User register sucessfly.", "status": 201, "type": "successfully"}
+            return {"message": "User register sucessfly.", "status": 200, "error": "None"}
             
-        return user
+        return {"message": "User already exists.", "status": 409, "error": key}
             
     ################################################################################
-    def login(self, data: object, db_conn: SQLAlchemy) -> None:
+    def login(self, data: object, db_conn: SQLAlchemy) -> dict:
         """ Login a user. """
         
         user_data = {
             "email": data.get('email')
         }
 
+        response, key = self.is_user_exists(user_data, db_conn)
+
+        if response:
+            user = self.get_user(user_data, key, db_conn)
+
         # Check if the user already exists
-        user = self.is_user_exists(user_data, db_conn)
-        
         if self.check_password(data, user):
-            return {"message": "Login successfully.", "status": 200, "type": "successfully"}
+            return {"message": "Login successfully.", "status": 200, "type": "user_login_success"}
     
-        return {"message": "User not found.", "status": 404, "type": "not_found_user"}
+        return {"message": "Login invalid.", "status": 404, "type": "not_possible_login"}
     
     ################################################################################
     def check_password(self, data: object, user) -> bool:
         """ Check the user password. """
         
-        # Converta a senha armazenada de string para bytes
+        # Convert the password to bytes
         stored_password_hash = user['user'].password.encode('utf-8')
         
-        # Verifique se a senha informada corresponde à senha armazenada
-        if not checkpw(data['password'].encode('utf-8'), stored_password_hash):
-            return False
+        # Check if the password is correct
+        if not checkpw(data['password'].encode('utf-8'), stored_password_hash): return False
         
         return True
     
     ################################################################################
-    def get_user(self, data: dict, db_conn: SQLAlchemy) -> None:
+    def get_user(self, data: dict, key: str, db_conn: SQLAlchemy) -> None:
         """ Get a user. """
         
-        return self.users_service.get_user(data, db_conn)
+        return self.users_service.get_user(data, key, db_conn)
     
     ################################################################################
     def update_user(self) -> None:
@@ -77,24 +82,18 @@ class UsersController:
         pass
     
     ################################################################################
-    def is_user_exists(self, user_data: object, db_conn: SQLAlchemy) -> None:
+    def is_user_exists(self, user_data: object, db_conn: SQLAlchemy) -> bool:
         """ Check if the user already exists. """
         
         data = {}
         
-        # Get the user by email
-        data['email'] = user_data["email"]
-        data['type'] = "email"
-        response = self.get_user(data, db_conn)
-        
-        if response['status'] == 200: return response
+        for key in user_data.keys():
+            data[key] = user_data[key]
+            data["type"] = key
+            response = self.get_user(data, key, db_conn)
 
-        data['phone_number'] = user_data["phone_number"]
-        data['type'] = "phone_number"
-        response = self.users_service.get_user(data, db_conn)
-        
-        if response['status'] == 200: return response
+            if response['status'] == 200: return True, key
             
-        return {"message": "User not found.", "status": 404}
+        return False, None
     
     ################################################################################
