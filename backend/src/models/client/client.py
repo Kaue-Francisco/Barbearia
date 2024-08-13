@@ -17,4 +17,4 @@ class Client(db.Model):
     password = db.Column(db.String(255), nullable=False)
     
     def __repr__(self):
-        return f"{{'id': {self.id}, 'name': {self.name}, 'phone_number': {self.phone_number}}}"
+        return f"{{'id': {self.id}, 'name': {self.name}, 'phone_number': {self.phone_number}, 'email': {self.email}, 'password': {self.password}}}"
