@@ -9,9 +9,9 @@ export default function TeamSection() {
             <div className="container px-4 md:px-6">
                 <div className="flex flex-col items-center justify-center space-y-4 text-center">
                     <div className="space-y-2">
-                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Conheça o Nosso Time</h2>
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Conheça o Nosso Barbeiro</h2>
                         <p className="mx-auto max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                            Nossa equipe de barbeiros talentosos e experientes está comprometida em fornecer a você a melhor experiência de cuidados pessoais.
+                            Nosso barbeiro talentoso e experiente está comprometido em fornecer a você a melhor experiência de cuidados pessoais.
                         </p>
                     </div>
                 </div>
