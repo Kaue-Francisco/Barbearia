@@ -1,4 +1,3 @@
-import { Link, useLocation } from "react-router-dom";
 import beardShave from "@/assets/beard-shave.png";
 import haircut from "@/assets/haircut.png";
 import eyebrow from "@/assets/eyebrow.png";
