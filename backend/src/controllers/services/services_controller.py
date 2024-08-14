@@ -2,8 +2,6 @@
 # Imports and Modules
 
 from flask_sqlalchemy import SQLAlchemy
-from controllers.users.users_controller import UsersController
-from services.schedule.schedule_service import ScheduleService
 from services.service.service_services import ServiceServices
 
 ################################################################################

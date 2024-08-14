@@ -10,12 +10,14 @@ from database.connect_database import DatabaseConnect
 # App Configurations
 
 app = Flask(__name__)
-schedule_controller = ScheduleController()
-users_controller = UsersController()
 database_connection = DatabaseConnect(app)
 db_conn = database_connection.get_db()
+users_controller = UsersController(db_conn)
+schedule_controller = ScheduleController(db_conn)
 
 ################################################################################
+#region Routes
+
 @app.route("/schedule", methods=["POST"])
 def schedule():
     data = request.get_json()['services']
@@ -59,6 +61,17 @@ def login():
     response = users_controller.login(data, db_conn)
     
     return make_response(jsonify(response["message"]), response["status"])
+
+################################################################################
+@app.route('/protected', methods=['GET'])
+@users_controller.token_required
+def protected_route(current_user):
+    return jsonify({"message": f"Hello {current_user.name}!", "status": 200})
+
+################################################################################
+@app.route('/logout', methods=['GET'])
+def logout():
+    return make_response(jsonify(users_controller.logout()))
 
 ################################################################################
 #region Main

@@ -11,8 +11,8 @@ from datetime import datetime, timedelta, time
 ################################################################################
 class ScheduleController:
     
-    def __init__(self):
-        self.users_controller = UsersController()
+    def __init__(self, db_conn):
+        self.users_controller = UsersController(db_conn)
         self.service_controller = ServicesController()
         self.schedule_service = ScheduleService()
         self.services_schedulling_service = ServicesSchedullingService()
