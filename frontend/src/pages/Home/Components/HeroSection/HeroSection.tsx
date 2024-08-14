@@ -14,8 +14,8 @@ export default function HeroSection() {
             Companhia do Bigode
           </h1>
           <p className="mx-auto max-w-[700px] text-muted md:text-xl">
-            Descubra a arte da barbearia tradicional em nosso espaço acolhedor e convidativo. Nossa equipe especializada está
-            comprometida em proporcionar a você uma experiência de cuidados pessoais de alto nível.
+            Descubra a arte da barbearia tradicional em nosso espaço acolhedor e convidativo. Nosso barbeiro especializado
+            está comprometido em proporcionar a você uma experiência de cuidados pessoais de alto nível.
           </p>
         </div>
         <Button className="bg-primary font-bold" asChild>
