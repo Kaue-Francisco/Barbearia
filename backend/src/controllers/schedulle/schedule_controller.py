@@ -42,7 +42,7 @@ class ScheduleController:
         """ Create a new schedule. """
         
         # Get the data from the request.
-        phone_number = data.get('phone_number')
+        id_user = {"id_user": data.get('id_user')}
         date = data.get('date')
         start_time = data.get('start_time')
         services = data.get('services')
@@ -51,7 +51,7 @@ class ScheduleController:
         end_time = self.calculate_time_to_finish(start_time, services, db_conn)
         
         # Get the user from the database.
-        user = self.users_controller.get_user(phone_number, db_conn)
+        user = self.users_controller.get_user(id_user, "id_user", db_conn)
         
         # Create the schedule.
         schedule = self.schedule_service.create_schedule(user, date, start_time, end_time, db_conn)
@@ -134,7 +134,11 @@ class ScheduleController:
                                 
                                 # Ensure the service end time is within working hours
                                 if service_end_time.time() <= end:
-                                    available_hours.append(current_time_slot)
+                                    # Only add time slots starting at the top of the hour if duration is 60 minutes
+                                    if service_duration == 60 and current_time_slot.minute == 0:
+                                        available_hours.append(current_time_slot)
+                                    elif service_duration != 60:
+                                        available_hours.append(current_time_slot)
                                     
                         current_time_slot += timedelta(minutes=30)
         

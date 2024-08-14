@@ -20,3 +20,6 @@ class ServicesSchedulling(db.Model):
     def __init__(self, service_id, schedulle_id):
         self.id_services = service_id
         self.id_schedullings = schedulle_id
+    
+    def __repr__(self):
+        return f"id: {self.id_services}"

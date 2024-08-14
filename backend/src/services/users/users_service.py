@@ -32,6 +32,8 @@ class UsersService:
             user = db_conn.session.query(Client).filter_by(email=data[f"{key}"]).first()
         elif key == "phone_number":
             user = db_conn.session.query(Client).filter_by(phone_number=data[f"{key}"]).first()
+        elif key == "id_user":
+            user = db_conn.session.query(Client).filter_by(id=data[f"{key}"]).first()
             
         if user:
             return {"user": user, "type": "User found.", "status": 200}

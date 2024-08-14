@@ -14,7 +14,7 @@ class ScheduleService:
     def create_schedule(self, user, date, start_time, end_time, db_conn) -> bool:
         """ Create a new schedule and return the created schedule. """
         
-        schedule = Schedule(client_id=user.id, date=date, start_time=start_time, end_time=end_time)
+        schedule = Schedule(client_id=user['user'].id, date=date, start_time=start_time, end_time=end_time)
         db_conn.session.add(schedule)
         db_conn.session.commit()
         
@@ -32,7 +32,7 @@ class ScheduleService:
     def get_schedules_by_user(self, user, db_conn) -> list:
         """ Get all the schedulings by user. """
         
-        schedules = db_conn.session.query(Schedule).filter_by(client_id=user.id).all()
+        schedules = db_conn.session.query(Schedule).filter_by(client_id=user['user'].id).all()
         
         # Convert each Schedule object to a dictionary
         schedules_dict = []

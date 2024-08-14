@@ -25,3 +25,10 @@ class ServicesSchedullingService():
         db_conn.session.commit()
         
         return services_schedullings
+    
+    def get_services_schedulling_by_schedulle(self, id_schedulle, db_conn):
+        """Get all the services_schedulling by schedulle"""
+        
+        services_schedullings = db_conn.session.query(ServicesSchedulling).filter_by(id_schedullings=id_schedulle).all()
+        
+        return services_schedullings
