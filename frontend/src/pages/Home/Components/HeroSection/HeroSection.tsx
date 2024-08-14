@@ -1,19 +1,27 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import barberShopImage from "@/assets/background.jpeg";
 
 export default function HeroSection() {
   return (
-    <div className="relative w-full h-screen">
-      <img
-        src="https://t4.ftcdn.net/jpg/01/15/15/13/360_F_115151341_0rJ1Do8vP1AQwSyEd3MgBdw8HXlTVlYL.jpg"
-        alt="Barbershop"
-        className="absolute inset-0 object-cover w-full h-full"
-        style={{ objectFit: "cover" }}
-      />
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white bg-black bg-opacity-50">
-        <h1 className="text-4xl font-bold">COMPANHIA DO BIGODE</h1>
-        <p className="mt-2 text-lg">BARBEARIA</p>
-        <Button className="mt-6 bg-primary text-white">Agende seu horário!</Button>
+    <section className="relative w-full min-h-screen py-12 md:py-24 lg:py-32 xl:py-48 bg-cover bg-center"
+      style={{ backgroundImage: `url(${barberShopImage})` }}
+    >
+      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="relative container px-4 md:px-6 flex flex-col items-center justify-center text-center space-y-4 py-12 rounded-xl">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-primary-foreground">
+            Companhia do Bigode
+          </h1>
+          <p className="mx-auto max-w-[700px] text-muted md:text-xl">
+            Descubra a arte da barbearia tradicional em nosso espaço acolhedor e convidativo. Nossa equipe especializada está
+            comprometida em proporcionar a você uma experiência de cuidados pessoais de alto nível.
+          </p>
+        </div>
+        <Button className="bg-primary font-bold" asChild>
+          <Link to="/agendamento">Agende seu Horário!</Link>
+        </Button>
       </div>
-    </div>
+    </section>
   );
 }
