@@ -7,25 +7,24 @@ export default function ServicesContent() {
   return (
     <section className="w-full py-12 md:py-24">
       <div className="container max-w-5xl px-4 md:px-6">
-        <div className="space-y-4 md:space-y-6 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Nossos Serviços</h2>
-          <p className="text-muted-foreground md:text-xl/relaxed">
-            Oferecemos uma variedade de serviços para atender às suas necessidades. <br/>
-            Desde cortes de cabelo clássicos até barbas e sobrancelhas, temos tudo o que você precisa.
-          </p>
+        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <div className="space-y-2">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Nossos Serviços</h2>
+            <p className="mx-auto max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Oferecemos uma variedade de serviços para atender às suas necessidades.
+              Desde cortes de cabelo clássicos até barbas e sobrancelhas, temos tudo o que você precisa.
+            </p>
+          </div>
         </div>
         <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 lg:grid-cols-3">
           <div className="relative overflow-hidden rounded-lg group">
-            <Link href="#" className="absolute inset-0 z-10" prefetch={false}>
-              <span className="sr-only">View</span>
-            </Link>
             <img
               src={haircut}
-              alt="Haircut"
-              width={450}
-              height={300}
-              className="object-cover w-full h-60 group-hover:opacity-50 transition-opacity"
-              style={{ aspectRatio: "450/300", objectFit: "cover" }}
+              alt="Barber cutting hair"
+              className="w-full h-[300px] object-cover"
+              width="500"
+              height="300"
+              style={{ aspectRatio: "500/300", objectFit: "cover" }}
             />
             <div className="p-4 bg-background">
               <h3 className="text-lg font-semibold">Corte de Cabelo</h3>
@@ -39,16 +38,13 @@ export default function ServicesContent() {
             </div>
           </div>
           <div className="relative overflow-hidden rounded-lg group">
-            <Link href="#" className="absolute inset-0 z-10" prefetch={false}>
-              <span className="sr-only">View</span>
-            </Link>
             <img
               src={beardShave}
-              alt="Shave"
-              width={450}
-              height={300}
-              className="object-cover w-full h-60 group-hover:opacity-50 transition-opacity"
-              style={{ aspectRatio: "450/300", objectFit: "cover" }}
+              alt="Barber shaving beard"
+              className="w-full h-[300px] object-cover"
+              width="500"
+              height="300"
+              style={{ aspectRatio: "500/300", objectFit: "cover" }}
             />
             <div className="p-4 bg-background">
               <h3 className="text-lg font-semibold">Barba e Bigode</h3>
@@ -62,16 +58,13 @@ export default function ServicesContent() {
             </div>
           </div>
           <div className="relative overflow-hidden rounded-lg group">
-            <Link href="#" className="absolute inset-0 z-10" prefetch={false}>
-              <span className="sr-only">View</span>
-            </Link>
             <img
               src={eyebrow}
-              alt="Grooming"
-              width={450}
-              height={300}
-              className="object-cover w-full h-60 group-hover:opacity-50 transition-opacity"
-              style={{ aspectRatio: "450/300", objectFit: "cover" }}
+              alt="Eyebrow shaping"
+              className="w-full h-[300px] object-cover"
+              width="500"
+              height="300"
+              style={{ aspectRatio: "500/300", objectFit: "cover" }}
             />
             <div className="p-4 bg-background">
               <h3 className="text-lg font-semibold">Sobrancelha</h3>
