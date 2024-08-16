@@ -10,10 +10,10 @@ export default function Navbar() {
     const pathname = location.pathname;
 
     return (
-        <header className="flex h-16 w-full items-center justify-between bg-foreground/90 px-4 md:px-6">
+        <header className="flex h-16 w-full items-center justify-between bg-secondary px-4 md:px-6">
             <Link to="/" className="mr-6 flex items-center space-x-2">
                 <img src={logo} alt={"Logo"} width={42} />
-                <span className="hidden font-bold sm:inline-block text-secondary/90">
+                <span className="hidden sm:inline-block text-background/80 font-bold transition-colors hover:text-background">
                     Barbearia
                 </span>
             </Link>
@@ -21,8 +21,8 @@ export default function Navbar() {
                 <Link
                     to="/docs"
                     className={cn(
-                        "font-bold transition-colors hover:text-secondary",
-                        pathname.startsWith("/docs") ? "text-secondary" : "text-secondary/90"
+                        "font-bold transition-colors hover:text-background",
+                        pathname.startsWith("/docs") ? "text-background" : "text-background/80"
                     )}
                 >
                     Inicio
@@ -30,8 +30,8 @@ export default function Navbar() {
                 <Link
                     to="/docs"
                     className={cn(
-                        "font-bold transition-colors hover:text-secondary",
-                        pathname.startsWith("/contato") ? "text-secondary" : "text-secondary/90"
+                        "font-bold transition-colors hover:text-background",
+                        pathname.startsWith("/contato") ? "text-background" : "text-background/80"
                     )}
                 >
                     Contato
