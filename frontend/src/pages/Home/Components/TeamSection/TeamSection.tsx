@@ -2,15 +2,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import barberImage from "@/assets/mestre.jpeg";
+import barberShopImage from "@/assets/background.png";
 
 export default function TeamSection() {
     return (
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted" style={{backgroundImage: `url(${barberShopImage})`}}>
             <div className="container px-4 md:px-6">
                 <div className="flex flex-col items-center justify-center space-y-4 text-center">
                     <div className="space-y-2">
                         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Conheça o Nosso Barbeiro</h2>
-                        <p className="mx-auto max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                        <p className="mx-auto max-w-[900px] text-black md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                             Nosso barbeiro talentoso e experiente está comprometido em fornecer a você a melhor experiência de cuidados pessoais.
                         </p>
                     </div>
