@@ -14,7 +14,6 @@ class Services(db.Model):
     
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     service_name = db.Column(db.String(50), nullable=False)
-    duration = db.Column(db.Integer, nullable=False)
     
     def __repr__(self):
-        return f"{{'id': {self.id}, 'service_name': {self.service_name}, 'duration': {self.duration}}}"
+        return f"{{'id': {self.id}, 'service_name': {self.service_name}}}"

@@ -22,4 +22,4 @@ class ServicesSchedulling(db.Model):
         self.id_schedullings = schedulle_id
     
     def __repr__(self):
-        return f"id: {self.id_services}"
+        return f"id_services: {self.id_services} id_schedullings: {self.id_schedullings}"
