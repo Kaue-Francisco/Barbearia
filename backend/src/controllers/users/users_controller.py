@@ -56,7 +56,6 @@ class UsersController:
 
                 return {"message": "Login successfully.", "status": 200, "token": token, "type": "user_login_success"}
         
-        print("Login invalid")
         return {"message": "Login invalid.", "status": 404, "type": "not_possible_login"}
 
     ################################################################################

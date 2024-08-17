@@ -32,8 +32,8 @@ def send_schedule():
     
     # If the status is 201, the user was created successfully.
     response_schedule = schedule_controller.create_schedule(data, db_conn)
-        
-    return make_response(jsonify(response_schedule))
+
+    return make_response(jsonify(response_schedule['message']), response_schedule['status'])
 
 ################################################################################
 @app.route("/schedulings_by_user", methods=["POST"])

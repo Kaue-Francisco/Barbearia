@@ -26,7 +26,8 @@ class ServicesSchedullingService():
         
         return services_schedullings
     
-    def get_services_schedulling_by_schedulle(self, id_schedulle, db_conn):
+    ################################################################################
+    def get_services_by_schedule(self, id_schedulle, db_conn):
         """Get all the services_schedulling by schedulle"""
         
         services_schedullings = db_conn.session.query(ServicesSchedulling).filter_by(id_schedullings=id_schedulle).all()

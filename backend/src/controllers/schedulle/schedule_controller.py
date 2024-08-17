@@ -20,11 +20,11 @@ class ScheduleController:
         # Define the working hours
         self.working_hours = {
             0: [],  # Monday (closed)
-            1: [(time(9, 0), time(19, 0))],  # Tuesday
-            2: [(time(9, 0), time(19, 0))],  # Wednesday
-            3: [(time(9, 0), time(19, 0))],  # Thursday
-            4: [(time(9, 0), time(19, 0))],  # Friday
-            5: [(time(8, 0), time(17, 0))],  # Saturday
+            1: [(time(9, 0), time(20, 0))],  # Tuesday
+            2: [(time(9, 0), time(20, 0))],  # Wednesday
+            3: [(time(9, 0), time(20, 0))],  # Thursday
+            4: [(time(9, 0), time(20, 0))],  # Friday
+            5: [(time(8, 0), time(18, 0))],  # Saturday
             6: []   # Sunday (closed)
         }
         
@@ -44,20 +44,34 @@ class ScheduleController:
         # Get the data from the request.
         id_user = {"id_user": data.get('id_user')}
         date = data.get('date')
-        start_time = data.get('start_time')
+        start_time = datetime.fromisoformat(data.get('start_time'))
         services = data.get('services')
-        
-        # Calculate the time to finish the schedule.
-        end_time = self.calculate_time_to_finish(start_time, services, db_conn)
         
         # Get the user from the database.
         user = self.users_controller.get_user(id_user, "id_user", db_conn)
+        
+        # Get all schedules for the user on the specified date
+        user_schedules = self.schedule_service.get_schedules_by_user_and_date(user, date, db_conn)
+        
+        # Check if the user has already scheduled the same service on the same day
+        for schedule in user_schedules:
+            
+            scheduled_services = self.services_schedulling_service.get_services_by_schedule(schedule.id, db_conn)
+
+            for scheduled_service in scheduled_services:
+                for new_service in services:
+                    
+                    if scheduled_service.id_services == new_service['service_id']:
+                        return {"message": "User has already scheduled this service on the same day.", "status": 400} 
+
+        # Calculate the time to finish the schedule.
+        end_time = self.calculate_time_to_finish(start_time)
         
         # Create the schedule.
         schedule = self.schedule_service.create_schedule(user, date, start_time, end_time, db_conn)
         self.services_schedulling_service.create_services_schedulling(services, schedule, db_conn)
         
-        return {"message": "Schedule checked."}, 201
+        return {"message": "Schedule created successfully."}, 201
     
     ################################################################################ 
     def get_all_schedulings(self, db_conn: SQLAlchemy) -> None:
@@ -68,17 +82,14 @@ class ScheduleController:
         return schedullings
     
     ################################################################################
-    def calculate_time_to_finish(self, start_time, services, db_conn: SQLAlchemy) -> None:
+    def calculate_time_to_finish(self, start_time) -> None:
         """ Calculate the time to finish the schedule. """
         
         # Convert start_time to a datetime object
-        time = datetime.fromisoformat(start_time)
+        time = start_time
         
-        for service in services:
-            response = self.service_controller.get_service_for_id(service['service_id'], db_conn)
-            
-            # Add the duration to the current time
-            time += timedelta(minutes=response.duration)
+        # Add the duration to the current time
+        time += timedelta(hours=1)
         
         end_time = time
         
@@ -88,23 +99,16 @@ class ScheduleController:
     def get_available_hours(self, data: object, db_conn: SQLAlchemy):
         """ Get all available hours for the next two weeks. """
         
-        services = [service for service in data]
-        if not services:
-            return []
-        
-        # Assume all services have the same duration for simplicity
-        service_duration = sum(service['duration'] for service in services)
-        
         # Generate all possible hours in the next two weeks
-        available_hours = self.generate_possible_hours(service_duration)
+        available_hours = self.generate_possible_hours()
         
         # Get all appointments from the database and filter out the booked hours
-        final_available_hours = self.filter_booked_hours(available_hours, service_duration, db_conn)
+        final_available_hours = self.filter_booked_hours(available_hours, db_conn)
         
         return final_available_hours
     
     ################################################################################
-    def generate_possible_hours(self, service_duration: int):
+    def generate_possible_hours(self):
         """ Generate all possible time slots over the next two weeks. """
         
         available_hours = []
@@ -121,31 +125,22 @@ class ScheduleController:
                     end_time = datetime.combine(day, end)
                     
                     # Generate time slots within working hours
-                    while current_time_slot + timedelta(minutes=service_duration) <= end_time:
-                        service_end_time = current_time_slot + timedelta(minutes=service_duration)
-                        
+                    while current_time_slot + timedelta(hours=1) <= end_time:
                         # Exclude time slots that overlap with lunch break
-                        if not (self.lunch_start <= current_time_slot.time() < self.lunch_end 
-                                or self.lunch_start < service_end_time.time() <= self.lunch_end):
+                        if not (self.lunch_start <= current_time_slot.time() < self.lunch_end):
                             
                             # Exclude past time slots
                             if day > self.current_date \
                             or (day == self.current_date and current_time_slot.time() > self.current_time):
                                 
-                                # Ensure the service end time is within working hours
-                                if service_end_time.time() <= end:
-                                    # Only add time slots starting at the top of the hour if duration is 60 minutes
-                                    if service_duration == 60 and current_time_slot.minute == 0:
-                                        available_hours.append(current_time_slot)
-                                    elif service_duration != 60:
-                                        available_hours.append(current_time_slot)
+                                available_hours.append(current_time_slot)
                                     
-                        current_time_slot += timedelta(minutes=30)
+                        current_time_slot += timedelta(hours=1)
         
         return available_hours
 
     ################################################################################
-    def filter_booked_hours(self, available_hours: list, service_duration: int, db_conn: SQLAlchemy):
+    def filter_booked_hours(self, available_hours: list, db_conn: SQLAlchemy):
         """ Filter out the time slots that are already booked. """
         
         # Get all schedulings from the database
@@ -155,7 +150,7 @@ class ScheduleController:
         
         # Check each available hour against existing bookings
         for hour in available_hours:
-            service_end_time = hour + timedelta(minutes=service_duration)
+            service_end_time = hour + timedelta(hours=1)
             conflicts = False
         
             for scheduling in schedulings:

@@ -21,6 +21,11 @@ class ScheduleService:
         return schedule
 
     ################################################################################
+    def get_schedules_by_user_and_date(self, user, date, db_conn):
+        """Get all schedules for a user on a specific date."""
+        return db_conn.session.query(Schedule).filter_by(client_id=user['user'].id, date=date).all()
+
+    ################################################################################
     def get_all_schedulings(self, db_conn) -> list:
         """ Get all the schedulings. """
         
