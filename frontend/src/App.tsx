@@ -1,11 +1,16 @@
-import React from 'react';
-import './App.css';
-import AppRoutes from './routes/AppRoutes';
+import Footer from './pages/Components/Footer/Footer'
+import Navbar from './pages/Components/Navbar/Navbar'
+import Home from './pages/Home/Home'
 
 function App() {
+
   return (
-      <AppRoutes />
-  );
+    <main>
+      <Navbar />
+      <Home />
+      <Footer />
+    </main>
+  )
 }
 
-export default App;
+export default App
