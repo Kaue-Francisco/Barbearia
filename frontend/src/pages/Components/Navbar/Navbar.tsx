@@ -36,6 +36,15 @@ export default function Navbar() {
                 >
                     Contato
                 </Link>
+                <Link
+                    to="/registro"
+                    className={cn(
+                        "font-bold transition-colors hover:text-secondary",
+                        pathname.startsWith("/contato") ? "text-secondary" : "text-secondary/90"
+                    )}
+                >
+                    Registrar-se
+                </Link>
                 <Button className="bg-primary font-bold" asChild><Link to="/agendamento">Agendamento</Link></Button>
             </nav>
             {/* Mobile Menu */}
@@ -60,6 +69,9 @@ export default function Navbar() {
                         </MobileLink>
                         <MobileLink to="/agendamento" className="hover:text-secondary">
                             Agendamento
+                        </MobileLink>
+                        <MobileLink to="/registro" className="hover:text-secondary">
+                            Registro
                         </MobileLink>
                     </nav>
                 </SheetContent>
