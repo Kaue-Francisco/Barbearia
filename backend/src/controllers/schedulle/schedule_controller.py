@@ -40,12 +40,13 @@ class ScheduleController:
     ################################################################################
     def create_schedule(self, data: object, db_conn: SQLAlchemy) -> None:
         """ Create a new schedule. """
-        
+        print("DATA: ",data)
         # Get the data from the request.
-        id_user = {"id_user": data.get('id_user')}
+        id_user = {"id_user": data.get('user_id')}
         date = data.get('date')
         start_time = datetime.fromisoformat(data.get('start_time'))
         services = data.get('services')
+        
         
         # Get the user from the database.
         user = self.users_controller.get_user(id_user, "id_user", db_conn)
@@ -71,7 +72,7 @@ class ScheduleController:
         schedule = self.schedule_service.create_schedule(user, date, start_time, end_time, db_conn)
         self.services_schedulling_service.create_services_schedulling(services, schedule, db_conn)
         
-        return {"message": "Schedule created successfully."}, 201
+        return {"message": "Schedule created successfully.", "status": 201}
     
     ################################################################################ 
     def get_all_schedulings(self, db_conn: SQLAlchemy) -> None:
