@@ -5,7 +5,6 @@ import Registro from './pages/Registro/Registro';
 import "./index.css";
 
 // Routes
-import App from './App.tsx';
 import Scheduling from './pages/Scheduling/Scheduling.tsx';
 
 // Router
@@ -16,7 +15,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from './components/ui/toaster.tsx';
 
 const BrowserRouter = createBrowserRouter([
-  {
+  { 
     path: '/',
     element: <App />
   },
