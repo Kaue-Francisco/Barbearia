@@ -40,12 +40,13 @@ class ScheduleController:
     ################################################################################
     def create_schedule(self, data: object, db_conn: SQLAlchemy) -> None:
         """ Create a new schedule. """
-        
+        print("DATA: ",data)
         # Get the data from the request.
-        id_user = {"id_user": data.get('id_user')}
+        id_user = {"id_user": data.get('user_id')}
         date = data.get('date')
         start_time = datetime.fromisoformat(data.get('start_time'))
         services = data.get('services')
+        
         
         # Get the user from the database.
         user = self.users_controller.get_user(id_user, "id_user", db_conn)
@@ -71,7 +72,7 @@ class ScheduleController:
         schedule = self.schedule_service.create_schedule(user, date, start_time, end_time, db_conn)
         self.services_schedulling_service.create_services_schedulling(services, schedule, db_conn)
         
-        return {"message": "Schedule created successfully."}, 201
+        return {"message": "Schedule created successfully.", "status": 201}
     
     ################################################################################ 
     def get_all_schedulings(self, db_conn: SQLAlchemy) -> None:
@@ -97,10 +98,12 @@ class ScheduleController:
     
     ################################################################################
     def get_available_hours(self, data: object, db_conn: SQLAlchemy):
-        """ Get all available hours for the next two weeks. """
+        """ Get all available hours for the specified date. """
         
-        # Generate all possible hours in the next two weeks
-        available_hours = self.generate_possible_hours()
+        date = datetime.fromisoformat(data.get('date')).date()
+        
+        # Generate all possible hours for the specified date
+        available_hours = self.generate_possible_hours_for_date(date)
         
         # Get all appointments from the database and filter out the booked hours
         final_available_hours = self.filter_booked_hours(available_hours, db_conn)
@@ -108,34 +111,30 @@ class ScheduleController:
         return final_available_hours
     
     ################################################################################
-    def generate_possible_hours(self):
-        """ Generate all possible time slots over the next two weeks. """
+    def generate_possible_hours_for_date(self, date):
+        """ Generate all possible time slots for a specific date. """
         
         available_hours = []
+        day_of_week = date.weekday()
         
-        # Loop over the next 14 days
-        for i in range(14):
-            day = self.current_date + timedelta(days=i)
-            day_of_week = day.weekday()
-            
-            # Check if the day is within working hours
-            if day_of_week in self.working_hours:
-                for start, end in self.working_hours[day_of_week]:
-                    current_time_slot = datetime.combine(day, start)
-                    end_time = datetime.combine(day, end)
-                    
-                    # Generate time slots within working hours
-                    while current_time_slot + timedelta(hours=1) <= end_time:
-                        # Exclude time slots that overlap with lunch break
-                        if not (self.lunch_start <= current_time_slot.time() < self.lunch_end):
+        # Check if the day is within working hours
+        if day_of_week in self.working_hours:
+            for start, end in self.working_hours[day_of_week]:
+                current_time_slot = datetime.combine(date, start)
+                end_time = datetime.combine(date, end)
+                
+                # Generate time slots within working hours
+                while current_time_slot + timedelta(hours=1) <= end_time:
+                    # Exclude time slots that overlap with lunch break
+                    if not (self.lunch_start <= current_time_slot.time() < self.lunch_end):
+                        
+                        # Exclude past time slots if the date is today
+                        if date > self.current_date \
+                        or (date == self.current_date and current_time_slot.time() > self.current_time):
                             
-                            # Exclude past time slots
-                            if day > self.current_date \
-                            or (day == self.current_date and current_time_slot.time() > self.current_time):
+                            available_hours.append(current_time_slot)
                                 
-                                available_hours.append(current_time_slot)
-                                    
-                        current_time_slot += timedelta(hours=1)
+                    current_time_slot += timedelta(hours=1)
         
         return available_hours
 

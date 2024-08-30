@@ -31,10 +31,10 @@ const testimonials = [
   },
   {
     quote:
-      "Excelente atendimento com hora marcada! Serviço de qualidade!!",
-    name: "Gilton Torres",
-    rating: 4,
-    imgSrc: "https://lh3.googleusercontent.com/a-/ALV-UjWDj85hXOt4U0VVreMHh-aEBQvKs-jJUIt12JXc2bTZnWZjNT4a=w60-h60-p-rp-mo-br100",
+      "Barbearia Top demais! O Julio é um ótimo profissional! Trabalha somente com hora marcada!",
+    name: "Kauê Francisco",
+    rating: 5,
+    imgSrc: "https://lh3.googleusercontent.com/a/ACg8ocIPgiQhld5X_cWDyOVpPl3w0x-Unaf5eMBJ83ovQLMpM9lL6Ts=w75-h75-p-rp-mo-br100",
   },
   {
     quote:

@@ -2,6 +2,7 @@
 #region Imports and Modules
 
 from flask import Flask, jsonify, make_response, request
+from flask_cors import CORS
 from controllers.schedulle.schedule_controller import ScheduleController
 from controllers.users.users_controller import UsersController
 from database.connect_database import DatabaseConnect
@@ -15,12 +16,16 @@ db_conn = database_connection.get_db()
 users_controller = UsersController(db_conn)
 schedule_controller = ScheduleController(db_conn)
 
+
+cors = CORS(app, origins='http://localhost:5173')
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 ################################################################################
 #region Routes
 
-@app.route("/schedule", methods=["POST"])
+@app.route("/schedule", methods=["GET"])
 def schedule():
-    data = request.get_json()['services']
+    data = request.get_json()['data']
     all_hours_of_day = schedule_controller.get_available_hours(data, db_conn)
     
     return make_response(jsonify(all_hours_of_day))
@@ -28,7 +33,8 @@ def schedule():
 ################################################################################
 @app.route("/send_schedule", methods=["POST"])
 def send_schedule():
-    data = request.get_json()['data']
+    print("DATA: ", request.get_json())
+    data = request.get_json()
     
     # If the status is 201, the user was created successfully.
     response_schedule = schedule_controller.create_schedule(data, db_conn)

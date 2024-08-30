@@ -2,6 +2,7 @@ import beardShave from "@/assets/beard-shave.png";
 import haircut from "@/assets/haircut.png";
 import eyebrow from "@/assets/eyebrow.png";
 
+
 export default function ServicesContent() {
   return (
     <section className="w-full py-12 md:py-24">
@@ -16,7 +17,7 @@ export default function ServicesContent() {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 lg:grid-cols-3">
-          <div className="relative overflow-hidden rounded-lg group">
+          <div className="relative overflow-hidden rounded-lg group shadow-lg">
             <img
               src={haircut}
               alt="Barber cutting hair"
@@ -36,7 +37,7 @@ export default function ServicesContent() {
               </div>
             </div>
           </div>
-          <div className="relative overflow-hidden rounded-lg group">
+          <div className="relative overflow-hidden rounded-lg group shadow-lg">
             <img
               src={beardShave}
               alt="Barber shaving beard"
@@ -56,7 +57,7 @@ export default function ServicesContent() {
               </div>
             </div>
           </div>
-          <div className="relative overflow-hidden rounded-lg group">
+          <div className="relative overflow-hidden rounded-lg group shadow-lg">
             <img
               src={eyebrow}
               alt="Eyebrow shaping"
