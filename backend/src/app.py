@@ -23,9 +23,9 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 ################################################################################
 #region Routes
 
-@app.route("/schedule", methods=["POST"])
+@app.route("/schedule", methods=["GET"])
 def schedule():
-    data = request.get_json()['services']
+    data = request.get_json()['data']
     all_hours_of_day = schedule_controller.get_available_hours(data, db_conn)
     
     return make_response(jsonify(all_hours_of_day))
