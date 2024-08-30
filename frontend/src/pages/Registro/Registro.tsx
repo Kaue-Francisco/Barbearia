@@ -1,32 +1,31 @@
-import background_image from '@/assets/fundo_brabo.png'
+import image_register_page from '@/assets/placa_cia_bigode.jpeg'
+import image_logo from '@/assets/logo.png'
 import RegisterInput from './Components/RegisterInput';
 
 export default function Registro() {
   return (
-    <div className="w-screen h-screen bg-cover bg-center bg-no-repeat flex justify-center items-center"
-      style={{ backgroundImage: `url(${background_image})` }}>
-      <div className="flex flex-col py-6 px-11 bg-slate-100 border-slate-950 rounded-md bg-opacity-90">
-        <h1 className='text-7xl text-center pb-2 italic '>CIA. do Bigode</h1>
-        <h1 className='text-2xl text-center text-gray-500'>Seja bem-vindo á Companhia do Bigode.</h1>
-        <h2 className='text-1xl text-center text-gray-500 pb-8'>Preencha os campos para continuar!</h2>
+    <div className="grid grid-cols-2">
+      <div className='flex flex-col justify-center items-center col-span-1 h-screen w-screen md:w-auto bg-background'>
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight mb-6 lg:text-5xl">Registre-se</h1>
+        <img className='md:w-[110px] md:h-[110px] w-[80px] h-[80px] mb-6' src={image_logo} />
+        <form className='flex flex-col md:w-4/5'>
+          <label htmlFor='nome' className='text-[18px]'>Nome completo:</label>
+          <RegisterInput id='nome' type='text' placeholder='Digite seu nome: '/>
 
-        <form className='flex flex-col justify-start items-start' >
-          <label htmlFor='nome_completo' className='text-[20px]'>Nome completo:</label>
-          <RegisterInput id='nome_completo' type='text'/>
-
-          <label htmlFor='numero_telefone' className='text-[20px]'>Numero de celular:</label>
-          <RegisterInput id='numero_telefone' type='text'/>
-
-          <label htmlFor='senha' className='text-[20px]'>Senha:</label>
-          <RegisterInput id='senha' type='password'/>
-
-          <label htmlFor='confirmar_senha' className='text-[20px]'>Confirmar senha:</label>
-          <RegisterInput id='confirmar_senha' type='password'/>
+          <label htmlFor='numero_celular' className='text-[18px]'>Número de celular:</label>
+          <RegisterInput id='numero_celular' type='text' placeholder='Digite o seu número de celular:'/>
+          
+          <label htmlFor='senha' className='text-[18px]'>Senha:</label>
+          <RegisterInput id='senha' type='password' placeholder='Digite sua senha:'/>
+          
+          <label htmlFor='confirmar_senha' className='text-[18px]'>Confirmar senha: </label>
+          <RegisterInput id='confirmar_senha' type='password' placeholder='Confirme sua senha:'/>
+          
+          <p className='text-center'>Já possui conta? Faça login <a className='text-blue-400' href='/login'>aqui!</a></p>
+          <button className='text-2xl text-white w-[20rem] py-3 mt-8 bg-orange-400 rounded-md md:w-auto'>Confirmar</button>
         </form>
-
-        <p className='text-center text-[18px]'>Já possui conta ? Faça login <a className='text-blue-600' href='/login'>aqui!</a></p>
-        <button className='mt-10 py-3 px-22 text-white bg-amber-700 text-[18px] rounded-md'>Avançar</button>
       </div>
+      <div className='md:flex bg-cover bg-center bg-no-repeat md:col-span-1 hidden' style={{ backgroundImage: `url(${image_register_page})`}} />
     </div>
   );
 } 
