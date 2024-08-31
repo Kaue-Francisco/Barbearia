@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx';
-import Registro from './pages/Registro/Registro';
+import Register from './pages/Register/Register.tsx';
 import "./index.css";
 
 // Routes
@@ -25,7 +25,7 @@ const BrowserRouter = createBrowserRouter([
   },
   {
     path: '/registro',
-    element:<Registro/>
+    element:<Register/>
   }
 ]);
 
