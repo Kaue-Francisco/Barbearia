@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import App from './App.tsx';
+import Register from './pages/Register/Register.tsx';
 import "./index.css";
 
 // Routes
-import App from './App.tsx';
 import Scheduling from './pages/Scheduling/Scheduling.tsx';
 
 // Router
@@ -14,7 +15,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from './components/ui/toaster.tsx';
 
 const BrowserRouter = createBrowserRouter([
-  {
+  { 
     path: '/',
     element: <App />
   },
@@ -22,10 +23,13 @@ const BrowserRouter = createBrowserRouter([
     path: '/agendamento',
     element: <Scheduling />
   },
+  {
+    path: '/registro',
+    element:<Register/>
+  }
 ]);
 
 const queryClient = new QueryClient()
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>

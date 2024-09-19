@@ -19,10 +19,10 @@ export default function Navbar() {
             </Link>
             <nav className="items-center hidden space-x-4 md:flex">
                 <Link
-                    to="/docs"
+                    to="/"
                     className={cn(
                         "font-bold transition-colors hover:text-background",
-                        pathname.startsWith("/docs") ? "text-background" : "text-background/80"
+                        pathname.startsWith("/inicio") ? "text-background" : "text-background/80"
                     )}
                 >
                     Inicio
@@ -37,7 +37,7 @@ export default function Navbar() {
                     Contato
                 </Link>
                 <Link
-                    to="/docs"
+                    to="/agendamento"
                     className={cn(
                         "font-bold transition-colors hover:text-background",
                         pathname.startsWith("/agendamento") ? "text-background" : "text-background/80"
@@ -45,7 +45,7 @@ export default function Navbar() {
                 >
                     Agendamento
                 </Link>
-                <Button className="bg-primary font-bold px-6" asChild><Link to="/agendamento">Entrar</Link></Button>
+                <Button className="bg-primary font-bold px-6" asChild><Link to="/registro">Registre-se</Link></Button>
             </nav>
             {/* Mobile Menu */}
             <Sheet>
@@ -53,7 +53,7 @@ export default function Navbar() {
                     <Button
                         variant="outline"
                         size="icon"
-                        className="shrink-0 md:hidden"
+                        className="bg-primary shrink-0 md:hidden"
                     >
                         <Menu className="h-5 w-5" />
                         <span className="sr-only">Toggle navigation menu</span>
@@ -72,6 +72,9 @@ export default function Navbar() {
                         </MobileLink>
                         <MobileLink to="/agendamento" className="hover:text-secondary">
                             Entrar
+                        </MobileLink>
+                        <MobileLink to="/registro" className="hover:text-secondary">
+                            Registre-se
                         </MobileLink>
                     </nav>
                 </SheetContent>

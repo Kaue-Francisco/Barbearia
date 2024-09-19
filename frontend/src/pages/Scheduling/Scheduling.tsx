@@ -77,7 +77,7 @@ export default function Scheduling() {
             <section className="w-full py-12 md:py-24" style={{ backgroundImage: `url(${barberShopImage})` }}>
                 <div className="container max-w-4xl mx-auto p-6 space-y-6 bg-background rounded-lg shadow-md">
                     <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Faça seu agendamento</h2>
-                    <Input placeholder="ID" value={id} onChange={(e) => setId(Number(e.target.value))} />
+                    
                     <div className="py-4">
                         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">Selecione os serviços</h3>
                         <ServicesCards services={services} selectedServices={selectedServices} setSelectedServices={setSelectedServices} />
