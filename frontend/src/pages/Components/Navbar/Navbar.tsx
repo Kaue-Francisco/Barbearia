@@ -28,7 +28,7 @@ export default function Navbar() {
                     Inicio
                 </Link>
                 <Link
-                    to="/docs"
+                    to="/contato"
                     className={cn(
                         "font-bold transition-colors hover:text-background",
                         pathname.startsWith("/contato") ? "text-background" : "text-background/80"

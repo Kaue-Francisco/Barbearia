@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx';
 import Register from './pages/Register/Register.tsx';
+import Contact from './pages/Contact/Contact.tsx';
 import "./index.css";
 
 // Routes
@@ -26,6 +27,10 @@ const BrowserRouter = createBrowserRouter([
   {
     path: '/registro',
     element:<Register/>
+  },
+  {
+    path: '/contato',
+    element:<Contact/>
   }
 ]);
 
