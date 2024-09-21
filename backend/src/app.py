@@ -80,6 +80,13 @@ def logout():
     return make_response(jsonify(users_controller.logout()))
 
 ################################################################################
+@app.route('/send_email', methods=['POST'])
+def send_email():
+    data = request.get_json().get('data', {})
+    response = users_controller.send_email(data)
+    return jsonify(response)
+
+################################################################################
 #region Main
 
 if __name__ == "__main__":
