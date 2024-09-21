@@ -15,13 +15,13 @@ export default function Forms() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const sendEmail = async (name: string, email: string, message: string) => {
-    // Substitua a URL abaixo pela URL do seu endpoint de backend
-    const response = await fetch('/api/send-email', {
+    
+    const response = await fetch('http://localhost:5000/send_email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, email, message }),
+      body: JSON.stringify({ data: { name, email, message } }), // Ajuste aqui
     })
 
     if (!response.ok) {
