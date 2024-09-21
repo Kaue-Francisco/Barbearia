@@ -6,12 +6,16 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 import jwt
 from flask import request, jsonify
+from email.message import EmailMessage
+import ssl
+import smtplib
 
 ################################################################################
 class UsersService:
     
     def __init__(self):
-        pass
+        self.receiver_email = ""
+        self.password_email = ""
     
     ################################################################################
     def create_user(self, data: object, db_conn: SQLAlchemy) -> bool:
@@ -64,3 +68,32 @@ class UsersService:
             return f(current_user, *args, **kwargs)
 
         return decorated
+
+    ################################################################################
+    def send_email(self, user_email: str, user_name: str, message: str) -> dict:
+        """ Send email to user. """
+
+        email = EmailMessage()
+        email.set_content(message + " \n\neste é o email do usuário: " + user_email)
+        email['Subject'] = f"Message from {user_name}"
+        email['From'] = user_email
+        email['To'] = self.receiver_email
+
+        # SMTP server configuration
+        smtp_server = "smtp.gmail.com"
+        smtp_port = 465
+        sender_email = self.receiver_email
+        sender_password = self.password_email
+
+        # Create a secure SSL context
+        context = ssl.create_default_context()
+
+        try:
+            with smtplib.SMTP_SSL(smtp_server, smtp_port, context=context) as server:
+                server.login(sender_email, sender_password)
+                server.send_message(email)
+                
+                return {"message": "Email sent successfully"}
+        except Exception as e:
+            
+            return {"error": str(e)}

@@ -113,3 +113,10 @@ class UsersController:
         return False, None
     
     ################################################################################
+    def send_email(self, data: dict) -> dict:
+        """ Send an email. """
+        user_email = data.get('email')
+        user_name = data.get('name')
+        user_message = data.get('message')
+        
+        return self.users_service.send_email(user_email, user_name, user_message)
