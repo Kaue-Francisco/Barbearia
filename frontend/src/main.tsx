@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx';
+import Login from './pages/Login/Login.tsx';
 import Register from './pages/Register/Register.tsx';
 import Contact from './pages/Contact/Contact.tsx';
 import "./index.css";
@@ -31,6 +32,10 @@ const BrowserRouter = createBrowserRouter([
   {
     path: '/contato',
     element:<Contact/>
+  },
+  {
+    path: '/login',
+    element:<Login/>
   }
 ]);
 
