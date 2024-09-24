@@ -37,19 +37,19 @@ export default function Registro() {
         <img className='md:w-[75px] md:h-[58px] w-[60px] h-[60px] mb-6' src={image_logo} />
         <form className='flex flex-col md:w-3/5' onSubmit={handleSubmit}>
           <Label htmlFor='name' className='mt-4 mb-1'>Nome completo:</Label>
-          <Input id='name' type='text' placeholder='Digite seu nome: ' value={formData.name} onChange={handleChange} />
+          <Input required id='name' type='text' placeholder='Digite seu nome: ' value={formData.name} onChange={handleChange} />
 
           <Label htmlFor='email' className='mt-4 mb-1'>Email:</Label>
-          <Input id='email' type='email' placeholder='Digite seu email: ' value={formData.email} onChange={handleChange} />
+          <Input required id='email' type='email' placeholder='Digite seu email: ' value={formData.email} onChange={handleChange} />
 
           <Label htmlFor='phone_number' className='mt-4 mb-1'>Número de celular:</Label>
-          <Input id='phone_number' type='text' placeholder='Digite o seu número de celular:' value={formData.phone_number} onChange={handleChange} />
+          <Input required id='phone_number' type='text' placeholder='Digite o seu número de celular:' value={formData.phone_number} onChange={handleChange} />
           
           <Label htmlFor='password' className='mt-4 mb-1'>Senha:</Label>
-          <Input id='password' type='password' placeholder='Digite sua senha:' value={formData.password} onChange={handleChange} />
+          <Input required id='password' type='password' placeholder='Digite sua senha:' value={formData.password} onChange={handleChange} />
           
           <Label htmlFor='confirm_password' className='mt-4 mb-1'>Confirmar sua senha: </Label>
-          <Input id='confirm_password' type='password' placeholder='Confirme sua senha:' value={formData.confirm_password} onChange={handleChange} />
+          <Input required id='confirm_password' type='password' placeholder='Confirme sua senha:' value={formData.confirm_password} onChange={handleChange} />
           
           {error && <p className='text-red-500 text-sm mt-2'>{error}</p>}
           

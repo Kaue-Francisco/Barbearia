@@ -11,10 +11,10 @@ export default function Login() {
         <img className='md:w-[75px] md:h-[58px] w-[60px] h-[60px] mb-6' src={image_logo} />
         <form className='flex flex-col md:w-3/5'>
           <Label htmlFor='email' className='mt-4 mb-1'>Email</Label>
-          <Input id='email' type='email' placeholder='Digite seu nome: '/>
+          <Input required id='email' type='email' placeholder='Digite seu nome: '/>
           
           <Label htmlFor='password' className='mt-4 mb-1'>Senha:</Label>
-          <Input id='password' type='password' placeholder='Digite sua senha:'/>
+          <Input required id='password' type='password' placeholder='Digite sua senha:'/>
           
           <button className='text-sm text-white mt-8 bg-orange-400 rounded-md md:w-auto font h-10'>Confirmar</button>
           <p className='text-center text-sm'>Não possuí conta? Clique  <a className='text-blue-400' href='/registro'>aqui!</a></p>
