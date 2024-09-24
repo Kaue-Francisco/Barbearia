@@ -45,7 +45,7 @@ export default function Navbar() {
                 >
                     Agendamento
                 </Link>
-                <Button className="bg-primary font-bold px-6" asChild><Link to="/registro">Registre-se</Link></Button>
+                <Button className="bg-primary font-bold px-6" asChild><Link to="/login">Entrar</Link></Button>
             </nav>
             {/* Mobile Menu */}
             <Sheet>
@@ -70,11 +70,8 @@ export default function Navbar() {
                         <MobileLink to="/agendamento" className="hover:text-secondary">
                             Agendamento
                         </MobileLink>
-                        <MobileLink to="/agendamento" className="hover:text-secondary">
+                        <MobileLink to="/login" className="hover:text-secondary">
                             Entrar
-                        </MobileLink>
-                        <MobileLink to="/registro" className="hover:text-secondary">
-                            Registre-se
                         </MobileLink>
                     </nav>
                 </SheetContent>
