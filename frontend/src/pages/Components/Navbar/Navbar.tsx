@@ -1,13 +1,34 @@
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Menu } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
+import { validateToken, fetchUserData } from "@/api/api";  // Importa as funções de api.ts
 
 export default function Navbar() {
     const location = useLocation();
     const pathname = location.pathname;
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');  // Ou sessionStorage.getItem('token')
+
+        const fetchData = async () => {
+            if (token) {
+                const isValid = await validateToken(token);
+                if (isValid) {
+                    const userData = await fetchUserData(token);
+                    if (userData && userData.name) {
+                        setUsername(userData.name);
+                    }
+                }
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <header className="flex h-18 w-full items-center justify-between bg-secondary px-4 md:px-6">
@@ -45,7 +66,13 @@ export default function Navbar() {
                 >
                     Agendamento
                 </Link>
-                <Button className="bg-primary font-bold px-6" asChild><Link to="/login">Entrar</Link></Button>
+                {username ? (
+                    <span className="bg-primary text-white px-4 py-2 rounded-full">
+                        {username}
+                    </span>
+                ) : (
+                    <Button className="bg-primary font-bold px-6" asChild><Link to="/login">Entrar</Link></Button>
+                )}
             </nav>
             {/* Mobile Menu */}
             <Sheet>
@@ -70,14 +97,18 @@ export default function Navbar() {
                         <MobileLink to="/agendamento" className="hover:text-secondary">
                             Agendamento
                         </MobileLink>
-                        <MobileLink to="/login" className="hover:text-secondary">
-                            Entrar
-                        </MobileLink>
+                        {username ? (
+                            <span className="hover:text-secondary">{username}</span>
+                        ) : (
+                            <MobileLink to="/login" className="hover:text-secondary">
+                                Entrar
+                            </MobileLink>
+                        )}
                     </nav>
                 </SheetContent>
             </Sheet>
         </header>
-    )
+    );
 }
 
 function MobileLink({
