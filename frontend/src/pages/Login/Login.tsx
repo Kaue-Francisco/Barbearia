@@ -1,9 +1,10 @@
-import image_register_page from '@/assets/placa_cia_bigode.jpeg'
-import image_logo from '@/assets/logo.png'
-import { useState } from 'react'
+import image_register_page from '@/assets/placa_cia_bigode.jpeg';
+import image_logo from '@/assets/logo.png';
+import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -11,11 +12,12 @@ export default function Login() {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();  // Hook do React Router para redirecionamento
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
   };
 
@@ -23,12 +25,6 @@ export default function Login() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const payload = {
-        data: {
-          email: formData.email,
-          password: formData.password,
-        },
-      };
       const response = await fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
@@ -41,8 +37,12 @@ export default function Login() {
         throw new Error('Erro ao fazer login');
       }
 
-      // Simulate login process
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const data = await response.json();
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        navigate('/');
+      }
+      
     } catch (error) {
       console.error(error.message);
     } finally {
