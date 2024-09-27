@@ -18,3 +18,12 @@ class Client(db.Model):
     
     def __repr__(self):
         return f"{{'id': {self.id}, 'name': {self.name}, 'phone_number': {self.phone_number}, 'email': {self.email}, 'password': {self.password}}}"
+    
+    def to_dict(self):
+        return {
+            'id': self.id, 
+            'name': self.name, 
+            'phone_number': self.phone_number, 
+            'email': self.email, 
+            'password': self.password
+        }

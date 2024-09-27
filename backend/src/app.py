@@ -109,7 +109,7 @@ def some_protected_route():
     return jsonify({"message": "Access granted.", "status": 200})
 
 ################################################################################
-@app.route("/get_user", methods=["POST"])
+@app.route("/get_user", methods=["GET"])
 def get_user():
     token_user = request.headers.get('Authorization')
     data = {"token": token_user}
