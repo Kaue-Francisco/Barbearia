@@ -15,7 +15,7 @@ class DatabaseConnect:
 
     ################################################################################
     def init_app(self):
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/barbearia_db'  # Substitua pelo seu URI do banco de dados
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/barbearia_db'  # Substitua pelo seu URI do banco de dados
         self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
         db.init_app(self.app)
 

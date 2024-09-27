@@ -109,6 +109,15 @@ def some_protected_route():
     return jsonify({"message": "Access granted.", "status": 200})
 
 ################################################################################
+@app.route("/get_user", methods=["POST"])
+def get_user():
+    token_user = request.headers.get('Authorization')
+    data = {"token": token_user}
+    response = users_controller.get_user(data, "token", db_conn)
+    
+    return make_response(jsonify(response['user']), response['status'])
+
+################################################################################
 #region Main
 
 if __name__ == "__main__":
