@@ -19,7 +19,7 @@ export const validateToken = async (token: string) => {
 export const fetchUserData = async (token: string) => {
   try {
     const response = await fetch(`${BASE_URL}get_user`, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': token,
