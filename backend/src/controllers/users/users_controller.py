@@ -61,8 +61,6 @@ class UsersController:
     ################################################################################
     def logout(self) -> dict:
         """ Logout a user. """
-        
-        # O frontend deve remover o token, portanto, o logout no backend pode ser um simples retorno de mensagem
         return {"message": "Logout successfully.", "status": 200}
     
     ################################################################################
@@ -126,19 +124,19 @@ class UsersController:
         """ Validar o token JWT. """
         
         try:
-            # Decodificar o token
+            # Decodify the token
             decoded_token = jwt.decode(token, 'your_secret_key', algorithms=['HS256'])
 
-            # Verificar se o token é válido e se não expirou
+            # Verify if the token is valid and has not expired
             user_id = decoded_token['user_id']
 
-            # Retornar uma resposta indicando que o token é válido
+            # Return a response indicating that the token is valid
             return {"message": "Token is valid.", "status": 200, "user_id": user_id}
         
         except jwt.ExpiredSignatureError:
-            # Caso o token tenha expirado
+            # Case the token has
             return {"message": "Token expired.", "status": 401, "error": "expired_token"}
         
         except jwt.InvalidTokenError:
-            # Caso o token seja inválido por outros motivos
+            # Case the token is invalid
             return {"message": "Invalid token.", "status": 401, "error": "invalid_token"}
