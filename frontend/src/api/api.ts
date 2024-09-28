@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/';  // URL base da API
+const BASE_URL = 'http://localhost:5000/';  // URL base of API
 
 export const validateToken = async (token: string) => {
   try {
@@ -33,6 +33,10 @@ export const fetchUserData = async (token: string) => {
   } catch (error) {
     
   }
+};
+
+export const logout = async () => {
+  localStorage.removeItem('token');
 };
 
 export default {
