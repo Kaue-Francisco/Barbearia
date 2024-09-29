@@ -51,7 +51,7 @@ class UsersController:
                 # Gerar o token JWT
                 token = jwt.encode({
                     'user_id': user['user'].id,
-                    'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)
+                    'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=1)
                 }, 'your_secret_key', algorithm='HS256')
 
                 return {"message": "Login successfully.", "status": 200, "token": token, "type": "user_login_success"}
@@ -61,8 +61,6 @@ class UsersController:
     ################################################################################
     def logout(self) -> dict:
         """ Logout a user. """
-        
-        # O frontend deve remover o token, portanto, o logout no backend pode ser um simples retorno de mensagem
         return {"message": "Logout successfully.", "status": 200}
     
     ################################################################################
@@ -120,3 +118,25 @@ class UsersController:
         user_message = data.get('message')
         
         return self.users_service.send_email(user_email, user_name, user_message)
+    
+    ################################################################################
+    def validate_token(self, token: str) -> dict:
+        """ Validar o token JWT. """
+        
+        try:
+            # Decodify the token
+            decoded_token = jwt.decode(token, 'your_secret_key', algorithms=['HS256'])
+
+            # Verify if the token is valid and has not expired
+            user_id = decoded_token['user_id']
+
+            # Return a response indicating that the token is valid
+            return {"message": "Token is valid.", "status": 200, "user_id": user_id}
+        
+        except jwt.ExpiredSignatureError:
+            # Case the token has
+            return {"message": "Token expired.", "status": 401, "error": "expired_token"}
+        
+        except jwt.InvalidTokenError:
+            # Case the token is invalid
+            return {"message": "Invalid token.", "status": 401, "error": "invalid_token"}

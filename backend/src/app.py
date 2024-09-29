@@ -66,6 +66,9 @@ def login():
     
     response = users_controller.login(data, db_conn)
     
+    if response['status'] == 200:
+        return make_response(jsonify({"message": response["message"], "token": response["token"]}), response["status"])
+    
     return make_response(jsonify(response["message"]), response["status"])
 
 ################################################################################
@@ -85,6 +88,34 @@ def send_email():
     data = request.get_json().get('data', {})
     response = users_controller.send_email(data)
     return jsonify(response)
+
+from flask import request, jsonify
+
+################################################################################
+@app.route('/validate-token', methods=['POST'])
+def some_protected_route():
+    token = request.headers.get('Authorization')
+    
+    if not token:
+        return jsonify({"message": "Token is missing.", "status": 401})
+    
+    # Method to validate the token
+    validation_response = users_controller.validate_token(token)
+    
+    if validation_response['status'] != 200:
+        return jsonify(validation_response)  # Return the error message
+    
+    # If the token is valid, return the success message
+    return jsonify({"message": "Access granted.", "status": 200})
+
+################################################################################
+@app.route("/get_user", methods=["GET"])
+def get_user():
+    token_user = request.headers.get('Authorization')
+    data = {"token": token_user}
+    response = users_controller.get_user(data, "token", db_conn)
+    
+    return make_response(jsonify(response['user']), response['status'])
 
 ################################################################################
 #region Main

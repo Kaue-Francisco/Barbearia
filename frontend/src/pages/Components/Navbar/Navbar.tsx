@@ -1,13 +1,46 @@
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
-import { Menu } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Menu, User } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Modal from "@/components/ui/modal";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
+import { validateToken, fetchUserData, logout } from "@/api/api";  // Importa as funções de api.ts
 
 export default function Navbar() {
     const location = useLocation();
     const pathname = location.pathname;
+    const [username, setUsername] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');  // Ou sessionStorage.getItem('token')
+
+        const fetchData = async () => {
+            if (token) {
+                const isValid = await validateToken(token);
+                if (isValid) {
+                    const userData = await fetchUserData(token);
+                    if (userData) {
+                        setUsername(userData.name);
+                    }
+                }
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const handleLogout = async () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            await logout(token);
+            localStorage.removeItem('token');
+            setUsername("");
+            setIsModalOpen(false);
+        }
+    };
 
     return (
         <header className="flex h-18 w-full items-center justify-between bg-secondary px-4 md:px-6">
@@ -45,7 +78,18 @@ export default function Navbar() {
                 >
                     Agendamento
                 </Link>
-                <Button className="bg-primary font-bold px-6" asChild><Link to="/login">Entrar</Link></Button>
+                {username ? (
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        className="bg-primary"
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        <User className="h-5 w-5" />
+                    </Button>
+                ) : (
+                    <Button className="bg-primary font-bold px-6" asChild><Link to="/login">Entrar</Link></Button>
+                )}
             </nav>
             {/* Mobile Menu */}
             <Sheet>
@@ -70,14 +114,23 @@ export default function Navbar() {
                         <MobileLink to="/agendamento" className="hover:text-secondary">
                             Agendamento
                         </MobileLink>
-                        <MobileLink to="/login" className="hover:text-secondary">
-                            Entrar
-                        </MobileLink>
+                        {username ? (
+                            <>
+                                <span className="hover:text-secondary">{username}</span>
+                                <Button className="hover:text-secondary" onClick={handleLogout}>Sair</Button>
+                            </>
+                        ) : (
+                            <MobileLink to="/login" className="hover:text-secondary">
+                                Entrar
+                            </MobileLink>
+                        )}
                     </nav>
                 </SheetContent>
             </Sheet>
+            {/* User Modal */}
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} username={username} onLogout={handleLogout}/>
         </header>
-    )
+    );
 }
 
 function MobileLink({

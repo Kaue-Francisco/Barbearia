@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CustomerSection from "./Components/CustomerSection/CustomerSection";
 import HeroSection from "./Components/HeroSection/HeroSection";
 import ServicesContent from "./Components/ServicesContent/ServicesContent";
