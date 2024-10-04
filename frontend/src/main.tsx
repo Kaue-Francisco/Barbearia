@@ -4,7 +4,7 @@ import App from './App.tsx';
 import Login from './pages/Login/Login.tsx';
 import Register from './pages/Register/Register.tsx';
 import Contact from './pages/Contact/Contact.tsx';
-import ProtectedRoute from './routes/ProtectedRoute.ts';
+import { ProtectedRoute, PublicRoute } from './routes/ProtectedRoute.ts';
 import "./index.css";
 
 // Routes
@@ -28,7 +28,7 @@ const BrowserRouter = createBrowserRouter([
   },
   {
     path: '/registro',
-    element:<Register/>
+    element: <PublicRoute element={<Register />} />
   },
   {
     path: '/contato',
@@ -36,7 +36,7 @@ const BrowserRouter = createBrowserRouter([
   },
   {
     path: '/login',
-    element:<Login/>
+    element: <PublicRoute element={<Login />} />
   }
 ]);
 
