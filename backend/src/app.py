@@ -106,10 +106,10 @@ def some_protected_route():
     validation_response = users_controller.validate_token(token)
     
     if validation_response['status'] != 200:
-        return jsonify(validation_response)  # Return the error message
+        return make_response(jsonify(validation_response), validation_response['status'])  # Return the error message
     
     # If the token is valid, return the success message
-    return jsonify({"message": "Access granted.", "status": 200})
+    return make_response(jsonify(validation_response), validation_response['status'])
 
 ################################################################################
 @app.route("/get_user", methods=["GET"])
