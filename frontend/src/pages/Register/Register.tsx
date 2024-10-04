@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import bcrypt from 'bcryptjs';
+import { useNavigate } from 'react-router-dom';
 
 export default function Registro() {
   const [formData, setFormData] = useState({
@@ -16,6 +16,8 @@ export default function Registro() {
   });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -34,8 +36,6 @@ export default function Registro() {
 
     setIsSubmitting(true);
     try {
-      const hashedPassword = await bcrypt.hash(formData.password, 10);
-      console.log(hashedPassword);
       const payload = {
         data: {
           name: formData.name,
@@ -55,6 +55,12 @@ export default function Registro() {
 
       if (!response.ok) {
         throw new Error('Erro ao registrar');
+      }
+
+      const data = await response.json();
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        navigate('/');
       }
 
       // Simulate registration process
