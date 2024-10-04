@@ -6,9 +6,14 @@ export const validateToken = async (token: string) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `${token}`,
       },
     });
+
+    if (response.status == 401) {
+      logout();
+    }
+
     return response.status === 200;
   } catch (error) {
     console.error('Erro na validação do token:', error);
