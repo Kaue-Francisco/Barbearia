@@ -33,4 +33,24 @@ const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   return isValid ? element : null;
 };
 
-export default ProtectedRoute;
+const PublicRoute = ({ element }: { element: JSX.Element }) => {
+  const navigate = useNavigate();
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const valid = await hasValidToken();
+      if (valid) {
+        navigate('/');
+      } else {
+        setIsValid(false);
+      }
+    };
+
+    checkToken();
+  }, [navigate]);
+
+  return isValid === false ? element : null;
+};
+
+export { ProtectedRoute, PublicRoute };
