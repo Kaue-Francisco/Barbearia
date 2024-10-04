@@ -29,6 +29,8 @@ class UsersService:
         user = Client(name=name, email=email, phone_number=phone_number, password=password)
         db_conn.session.add(user)
         db_conn.session.commit()
+        
+        return user.to_dict()
     
     ################################################################################
     def get_user(self, data: dict, key:str, db_conn: SQLAlchemy) -> None:

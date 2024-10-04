@@ -57,7 +57,10 @@ def register():
 
     response = users_controller.register(data, db_conn)
     
-    return make_response(jsonify(response["message"], response["error"]), response['status'])
+    if response['status'] == 200:
+        return make_response(jsonify({"message": response["message"], "token": response["token"]}), response["status"])
+    
+    return make_response(jsonify(response["message"]), response["status"])
 
 ################################################################################
 @app.route("/login", methods=["POST"])

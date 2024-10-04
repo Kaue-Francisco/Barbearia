@@ -32,8 +32,14 @@ class UsersController:
             salt = gensalt()
             data['password'] = hashpw(data.get('password').encode('utf-8'), salt)
 
-            self.users_service.create_user(data, db_conn)
-            return {"message": "User register sucessfly.", "status": 200, "error": "None"}
+            user = self.users_service.create_user(data, db_conn)
+            
+            token = jwt.encode({
+                    'user_id': user['id'],
+                    'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=1)
+                }, 'your_secret_key', algorithm='HS256')
+                        
+            return {"message": "User register sucessfly.", "status": 200, "token": token, "error": "None"}
             
         return {"message": "User already exists.", "status": 409, "error": key}
             
