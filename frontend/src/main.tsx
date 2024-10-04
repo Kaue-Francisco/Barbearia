@@ -4,6 +4,7 @@ import App from './App.tsx';
 import Login from './pages/Login/Login.tsx';
 import Register from './pages/Register/Register.tsx';
 import Contact from './pages/Contact/Contact.tsx';
+import ProtectedRoute from './routes/ProtectedRoute.ts';
 import "./index.css";
 
 // Routes
@@ -23,7 +24,7 @@ const BrowserRouter = createBrowserRouter([
   },
   {
     path: '/agendamento',
-    element: <Scheduling />
+    element: <ProtectedRoute element={<Scheduling />} />
   },
   {
     path: '/registro',
