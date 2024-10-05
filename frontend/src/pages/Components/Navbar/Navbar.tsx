@@ -116,7 +116,7 @@ export default function Navbar() {
                         </MobileLink>
                         {username ? (
                             <>
-                                <span className="hover:text-secondary">{username}</span>
+                                <span className="hover:text-secondary truncate max-w-[150px]">{username}</span>
                                 <Button className="hover:text-secondary" onClick={handleLogout}>Sair</Button>
                             </>
                         ) : (
@@ -128,7 +128,7 @@ export default function Navbar() {
                 </SheetContent>
             </Sheet>
             {/* User Modal */}
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} username={username} onLogout={handleLogout}/>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} username={username} onLogout={handleLogout} />
         </header>
     );
 }
